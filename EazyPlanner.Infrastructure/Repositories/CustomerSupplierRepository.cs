@@ -1,0 +1,93 @@
+﻿using EazyPlanner.Domain.Abstractions;
+using EazyPlanner.Domain.Entities;
+using EazyPlanner.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
+
+namespace EazyPlanner.Infrastructure.Repositories
+{
+    public class CustomerSupplierRepository : ICustomerSupplierRepository
+    {
+        private ApplicationDbContext _context;
+        public CustomerSupplierRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<IEnumerable<CustomerSupplier>> GetCustomersSuppliers()
+        {
+            if (_context is not null && _context.CustomerSupplier is not null)
+            {
+                var customersSuppliers = await _context.CustomerSupplier.ToListAsync();
+                return customersSuppliers;
+            }
+            else
+            {
+                return new List<CustomerSupplier>();
+            }
+        }
+        public async Task<CustomerSupplier?> GetCustomerSupplier(int id)
+        {
+
+            var customerSupplier = await _context.CustomerSupplier.FirstOrDefaultAsync(c => c.CustomerSupplierId == id);
+            if (customerSupplier is null)
+            {
+                throw new InvalidOperationException($"Customer supplier com id{id} não encontrado");
+            }
+            return customerSupplier;
+        }
+        public async Task<CustomerSupplier> AddCustomerSupplier(CustomerSupplier customerSupplier)
+        {
+            if (_context is not null && customerSupplier is not null && _context.CustomerSupplier is not null)
+            {
+                _context.CustomerSupplier.Add(customerSupplier);
+                await _context.SaveChangesAsync();
+                return customerSupplier;
+            }
+            else
+            {
+                throw new InvalidOperationException("Invalid data...");
+            }
+        }
+        public async Task UpdateCustomerSupplier(CustomerSupplier customerSupplier)
+        {
+            if (customerSupplier is not null)
+            {
+                _context.Entry(customerSupplier).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentNullException("Invalid data...");
+            }
+        }
+
+        public async Task DeleteCustomerSupplier(int id)
+        {
+            var customerSupplier = await GetCustomerSupplier(id);
+            if (customerSupplier is not null)
+            {
+                _context.CustomerSupplier.Remove(customerSupplier);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new InvalidOperationException("Invalid data...");
+            }
+        }
+
+        IEnumerable<CustomerSupplier> ICustomerSupplierRepository.GetCustomersSuppliers()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<CustomerSupplier> ICustomerSupplierRepository.UpdateCustomerSupplier(CustomerSupplier customerSupplier)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<CustomerSupplier> ICustomerSupplierRepository.DeleteCustomerSupplier(int id)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
