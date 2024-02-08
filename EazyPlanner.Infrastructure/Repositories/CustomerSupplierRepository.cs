@@ -75,19 +75,19 @@ namespace EazyPlanner.Infrastructure.Repositories
             }
         }
 
-        IEnumerable<CustomerSupplier> ICustomerSupplierRepository.GetCustomersSuppliers()
-        {
-            throw new NotImplementedException();
-        }
+        //IEnumerable<CustomerSupplier> ICustomerSupplierRepository.GetCustomersSuppliers()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        Task<CustomerSupplier> ICustomerSupplierRepository.UpdateCustomerSupplier(CustomerSupplier customerSupplier)
-        {
-            throw new NotImplementedException();
-        }
+        //Task<CustomerSupplier> ICustomerSupplierRepository.UpdateCustomerSupplier(CustomerSupplier customerSupplier)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        Task<CustomerSupplier> ICustomerSupplierRepository.DeleteCustomerSupplier(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //Task<CustomerSupplier> ICustomerSupplierRepository.DeleteCustomerSupplier(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
