@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EazyPlanner.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240209185924_Initial")]
+    [Migration("20240209224326_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -259,7 +259,7 @@ namespace EazyPlanner.Infrastructure.Migrations
 
                     b.Property<decimal?>("ActualAmount")
                         .HasPrecision(20, 2)
-                        .HasColumnType("money");
+                        .HasColumnType("decimal(20,2)");
 
                     b.Property<string>("Category")
                         .HasMaxLength(100)
@@ -298,7 +298,7 @@ namespace EazyPlanner.Infrastructure.Migrations
 
                     b.Property<decimal>("PlannedAmount")
                         .HasPrecision(20, 2)
-                        .HasColumnType("money");
+                        .HasColumnType("decimal(20,2)");
 
                     b.Property<DateTime?>("ReceivedDate")
                         .HasColumnType("datetime2");
@@ -334,7 +334,7 @@ namespace EazyPlanner.Infrastructure.Migrations
 
                     b.Property<decimal>("Amount")
                         .HasPrecision(20, 2)
-                        .HasColumnType("money");
+                        .HasColumnType("decimal(20,2)");
 
                     b.Property<DateTime?>("CreateDate")
                         .HasColumnType("datetime2");

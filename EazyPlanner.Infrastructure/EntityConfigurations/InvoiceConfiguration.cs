@@ -8,7 +8,7 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Invoice> builder)
         {
-            builder.Property(p => p.Amount).HasColumnType("money").HasPrecision(20, 2);
+            builder.Property(p => p.Amount).IsRequired().HasPrecision(20, 2);
         }
     }
 }
