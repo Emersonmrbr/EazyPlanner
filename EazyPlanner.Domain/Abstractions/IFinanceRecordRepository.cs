@@ -4,10 +4,10 @@ namespace EazyPlanner.Domain.Abstractions
 {
     public interface IFinanceRecordRepository
     {
-        IEnumerable<FinancialRecord> GetFinancialRecords();
+        Task<IEnumerable<FinancialRecord>> GetFinancialRecords();
         Task<FinancialRecord?> GetFinancialRecord(int id);
         Task<FinancialRecord> AddFinancialRecord(FinancialRecord financialRecord);
-        Task<FinancialRecord> UpdateFinancialRecord(FinancialRecord financialRecord);
-        Task<FinancialRecord> DeleteFinancialRecord(int id);
+        Task UpdateFinancialRecord(FinancialRecord financialRecord);
+        Task DeleteFinancialRecord(int id);
     }
 }

@@ -4,10 +4,10 @@ namespace EazyPlanner.Domain.Abstractions
 {
     public interface IcostCenterRepository
     {
-        IEnumerable<CostCenter> GetCostCenters();
+        Task<IEnumerable<CostCenter>> GetCostCenters();
         Task<CostCenter?> GetCostCenter(int id);
         Task<CostCenter> AddCostCenter(CostCenter costCenter);
-        Task<CostCenter> UpdateCostCenter(CostCenter costCenter);
-        Task<CostCenter> DeleteCostCenter(int id);
+        Task UpdateCostCenter(CostCenter costCenter);
+        Task DeleteCostCenter(int id);
     }
 }

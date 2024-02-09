@@ -4,10 +4,10 @@ namespace EazyPlanner.Domain.Abstractions
 {
     public interface IPaymentMethodRepository
     {
-        IEnumerable<PaymentMethod> GetPaymentMethods();
+        Task<IEnumerable<PaymentMethod>> GetPaymentMethods();
         Task<PaymentMethod?> GetPaymentMethod(int id);
         Task<PaymentMethod> AddPaymentMethod(PaymentMethod paymentMethod);
-        Task<PaymentMethod> UpdatePaymentMethod(PaymentMethod paymentMethod);
-        Task<PaymentMethod> DeletePaymentMethod(int id);
+        Task UpdatePaymentMethod(PaymentMethod paymentMethod);
+        Task DeletePaymentMethod(int id);
     }
 }

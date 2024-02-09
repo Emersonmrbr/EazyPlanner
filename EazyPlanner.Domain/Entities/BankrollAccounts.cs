@@ -29,12 +29,14 @@ namespace EazyPlanner.Domain.Entities
         public string? CreatedBy { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DataType(DataType.DateTime)]
         public DateTime? CreateDate { get; set; }
 
         [DataType(DataType.Text)]
         public string? UpdateBy { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [DataType(DataType.DateTime)]
         public DateTime? UpdateDate { get; set; }
 
         [ForeignKey(nameof(FinanceCategory))]

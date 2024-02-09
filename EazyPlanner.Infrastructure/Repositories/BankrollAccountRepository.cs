@@ -13,28 +13,6 @@ namespace EazyPlanner.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<BankrollAccount>> GetBankrollAccounters()
-        {
-            if (_context is not null && _context.BankrollAccount is not null)
-            {
-                var BankrollAccounts = await _context.BankrollAccount.ToListAsync();
-                return BankrollAccounts;
-            }
-            else
-            {
-                return new List<BankrollAccount>();
-            }
-        }
-        public async Task<BankrollAccount?> GetBankrollAccount(int id)
-        {
-
-            var bankrollAccount = await _context.BankrollAccount.FirstOrDefaultAsync(c => c.BankrollAccountsId == id);
-            if (bankrollAccount is null)
-            {
-                throw new InvalidOperationException($"Customer supplier com id{id} não encontrado");
-            }
-            return bankrollAccount;
-        }
         public async Task<BankrollAccount> AddBankrollAccount(BankrollAccount bankrollAccount)
         {
             if (_context is not null && bankrollAccount is not null && _context.BankrollAccount is not null)
@@ -46,18 +24,6 @@ namespace EazyPlanner.Infrastructure.Repositories
             else
             {
                 throw new InvalidOperationException("Invalid data...");
-            }
-        }
-        public async Task UpdateBankrollAccount(BankrollAccount bankrollAccount)
-        {
-            if (bankrollAccount is not null)
-            {
-                _context.Entry(bankrollAccount).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                throw new ArgumentNullException("Invalid data...");
             }
         }
 
@@ -75,6 +41,43 @@ namespace EazyPlanner.Infrastructure.Repositories
             }
         }
 
+
+        public async Task<BankrollAccount?> GetBankrollAccount(int id)
+        {
+
+            var bankrollAccount = await _context.BankrollAccount.FirstOrDefaultAsync(c => c.BankrollAccountsId == id);
+            if (bankrollAccount is null)
+            {
+                throw new InvalidOperationException($"Bankroll account com id{id} não encontrado");
+            }
+            return bankrollAccount;
+        }
+
+        public async Task<IEnumerable<BankrollAccount>> GetBankrollAccounters()
+        {
+            if (_context is not null && _context.BankrollAccount is not null)
+            {
+                var BankrollAccounts = await _context.BankrollAccount.ToListAsync();
+                return BankrollAccounts;
+            }
+            else
+            {
+                return new List<BankrollAccount>();
+            }
+        }
+
+        public async Task UpdateBankrollAccount(BankrollAccount bankrollAccount)
+        {
+            if (bankrollAccount is not null)
+            {
+                _context.Entry(bankrollAccount).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentNullException("Invalid data...");
+            }
+        }
 
     }
 }

@@ -13,28 +13,6 @@ namespace EazyPlanner.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<CustomerSupplier>> GetCustomersSuppliers()
-        {
-            if (_context is not null && _context.CustomerSupplier is not null)
-            {
-                var customersSuppliers = await _context.CustomerSupplier.ToListAsync();
-                return customersSuppliers;
-            }
-            else
-            {
-                return new List<CustomerSupplier>();
-            }
-        }
-        public async Task<CustomerSupplier?> GetCustomerSupplier(int id)
-        {
-
-            var customerSupplier = await _context.CustomerSupplier.FirstOrDefaultAsync(c => c.CustomerSupplierId == id);
-            if (customerSupplier is null)
-            {
-                throw new InvalidOperationException($"Customer supplier com id{id} não encontrado");
-            }
-            return customerSupplier;
-        }
         public async Task<CustomerSupplier> AddCustomerSupplier(CustomerSupplier customerSupplier)
         {
             if (_context is not null && customerSupplier is not null && _context.CustomerSupplier is not null)
@@ -46,18 +24,6 @@ namespace EazyPlanner.Infrastructure.Repositories
             else
             {
                 throw new InvalidOperationException("Invalid data...");
-            }
-        }
-        public async Task UpdateCustomerSupplier(CustomerSupplier customerSupplier)
-        {
-            if (customerSupplier is not null)
-            {
-                _context.Entry(customerSupplier).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                throw new ArgumentNullException("Invalid data...");
             }
         }
 
@@ -72,6 +38,43 @@ namespace EazyPlanner.Infrastructure.Repositories
             else
             {
                 throw new InvalidOperationException("Invalid data...");
+            }
+        }
+
+        public async Task<CustomerSupplier?> GetCustomerSupplier(int id)
+        {
+
+            var customerSupplier = await _context.CustomerSupplier.FirstOrDefaultAsync(c => c.CustomerSupplierId == id);
+            if (customerSupplier is null)
+            {
+                throw new InvalidOperationException($"Customer supplier com id{id} não encontrado");
+            }
+            return customerSupplier;
+        }
+
+        public async Task<IEnumerable<CustomerSupplier>> GetCustomersSuppliers()
+        {
+            if (_context is not null && _context.CustomerSupplier is not null)
+            {
+                var customersSuppliers = await _context.CustomerSupplier.ToListAsync();
+                return customersSuppliers;
+            }
+            else
+            {
+                return new List<CustomerSupplier>();
+            }
+        }
+
+        public async Task UpdateCustomerSupplier(CustomerSupplier customerSupplier)
+        {
+            if (customerSupplier is not null)
+            {
+                _context.Entry(customerSupplier).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentNullException("Invalid data...");
             }
         }
     }
