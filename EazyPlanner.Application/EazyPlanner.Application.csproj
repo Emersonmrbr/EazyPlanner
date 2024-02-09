@@ -7,14 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EazyPlanner.Dmain\EazyPlanner.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Abstractions\" />
     <Folder Include="DTOs\" />
     <Folder Include="Mappings\" />
     <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EazyPlanner.Domain\EazyPlanner.Domain.csproj" />
   </ItemGroup>
 
 </Project>

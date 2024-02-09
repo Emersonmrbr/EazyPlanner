@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EazyPlanner.Domain", "EazyPlanner.Dmain\EazyPlanner.Domain.csproj", "{0BA1BF41-62D3-4D4C-84E2-737C10878D00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EazyPlanner.Application", "EazyPlanner.Application\EazyPlanner.Application.csproj", "{5B1DD926-8822-4E19-838A-DAF1C04CAAE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EazyPlanner.Application", "EazyPlanner.Application\EazyPlanner.Application.csproj", "{5B1DD926-8822-4E19-838A-DAF1C04CAAE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EazyPlanner.Infrastructure", "EazyPlanner.Infrastructure\EazyPlanner.Infrastructure.csproj", "{3C2C305D-C6BB-4463-9A71-388A54EE4BBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EazyPlanner.Infrastructure", "EazyPlanner.Infrastructure\EazyPlanner.Infrastructure.csproj", "{3C2C305D-C6BB-4463-9A71-388A54EE4BBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EazyPlanner.CrossCutting", "EazyPlanner.CrossCutting\EazyPlanner.CrossCutting.csproj", "{4770CBCE-0B10-47DD-B982-9E204CE08441}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EazyPlanner.CrossCutting", "EazyPlanner.CrossCutting\EazyPlanner.CrossCutting.csproj", "{4770CBCE-0B10-47DD-B982-9E204CE08441}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EazyPlanner.Presentation", "EazyPlanner.Presentation\EazyPlanner.Presentation.csproj", "{A872FC8B-A180-4886-A6EF-79875E3DCB8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EazyPlanner.Presentation", "EazyPlanner.Presentation\EazyPlanner.Presentation.csproj", "{A872FC8B-A180-4886-A6EF-79875E3DCB8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EazyPlanner.Domain", "EazyPlanner.Domain\EazyPlanner.Domain.csproj", "{2559AAFD-5880-44D9-A0E8-A09E9A03E2D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0BA1BF41-62D3-4D4C-84E2-737C10878D00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0BA1BF41-62D3-4D4C-84E2-737C10878D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0BA1BF41-62D3-4D4C-84E2-737C10878D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0BA1BF41-62D3-4D4C-84E2-737C10878D00}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B1DD926-8822-4E19-838A-DAF1C04CAAE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B1DD926-8822-4E19-838A-DAF1C04CAAE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B1DD926-8822-4E19-838A-DAF1C04CAAE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{A872FC8B-A180-4886-A6EF-79875E3DCB8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A872FC8B-A180-4886-A6EF-79875E3DCB8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A872FC8B-A180-4886-A6EF-79875E3DCB8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2559AAFD-5880-44D9-A0E8-A09E9A03E2D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2559AAFD-5880-44D9-A0E8-A09E9A03E2D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2559AAFD-5880-44D9-A0E8-A09E9A03E2D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2559AAFD-5880-44D9-A0E8-A09E9A03E2D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

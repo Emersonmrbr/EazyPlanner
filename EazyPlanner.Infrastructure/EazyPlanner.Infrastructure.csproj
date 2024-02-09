@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EazyPlanner.Dmain\EazyPlanner.Domain.csproj" />
+    <ProjectReference Include="..\EazyPlanner.Domain\EazyPlanner.Domain.csproj" />
   </ItemGroup>
 
 </Project>
