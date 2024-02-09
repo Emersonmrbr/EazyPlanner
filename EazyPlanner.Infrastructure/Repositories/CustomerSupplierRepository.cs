@@ -74,20 +74,5 @@ namespace EazyPlanner.Infrastructure.Repositories
                 throw new InvalidOperationException("Invalid data...");
             }
         }
-
-        //IEnumerable<CustomerSupplier> ICustomerSupplierRepository.GetCustomersSuppliers()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //Task<CustomerSupplier> ICustomerSupplierRepository.UpdateCustomerSupplier(CustomerSupplier customerSupplier)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //Task<CustomerSupplier> ICustomerSupplierRepository.DeleteCustomerSupplier(int id)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

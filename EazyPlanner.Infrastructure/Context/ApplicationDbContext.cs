@@ -7,8 +7,8 @@ namespace EazyPlanner.Infrastructure.Context
     {
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-        public DbSet<BankrollAccount> BankrollAccounts { get; set; }
-        public DbSet<CostCenter> CostCenters { get; set; }
+        public DbSet<BankrollAccount> BankrollAccount { get; set; }
+        public DbSet<CostCenter> CostCenter { get; set; }
         public DbSet<CustomerSupplier> CustomerSupplier { get; set; }
         public DbSet<FinanceCategory> FinanceCategory { get; set; }
         public DbSet<FinancialRecord> FinancialRecord { get; set; }

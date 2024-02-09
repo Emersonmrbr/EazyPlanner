@@ -4,10 +4,10 @@ namespace EazyPlanner.Domain.Abstractions
 {
     public interface IBankrollAccountRepository
     {
-        IEnumerable<BankrollAccount> GetCustomers();
-        Task<BankrollAccount?> GetCustomer(int id);
-        Task<BankrollAccount> AddCustomer(BankrollAccount bankrollAccount);
-        Task<BankrollAccount> UpdateCustomer(BankrollAccount bankrollAccount);
-        Task<BankrollAccount> DeleteCustomer(int id);
+        Task<IEnumerable<BankrollAccount>> GetBankrollAccounters();
+        Task<BankrollAccount?> GetBankrollAccount(int id);
+        Task<BankrollAccount> AddBankrollAccount(BankrollAccount bankrollAccount);
+        Task UpdateBankrollAccount(BankrollAccount bankrollAccount);
+        Task DeleteBankrollAccount(int id);
     }
 }
