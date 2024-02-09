@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace EazyPlanner.Domain.Entities
 {
     [Table("Invoice")]
-    public class Invoice
+    public class Invoice : _CreateBase
     {
         public Invoice(int invoiceId, string name, string number, decimal amount, DateTime date, string file, string? createdBy, DateTime? createDate, string? updateBy, DateTime? updateDate)
         {
@@ -46,18 +46,6 @@ namespace EazyPlanner.Domain.Entities
         [MaxLength(255, ErrorMessage = "File must be at most 255 characters.")]
         [DataType(DataType.Text)]
         public required string File { get; set; }
-
-        [DataType(DataType.Text)]
-        public string? CreatedBy { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime? CreateDate { get; set; }
-
-        [DataType(DataType.Text)]
-        public string? UpdateBy { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime? UpdateDate { get; set; }
 
         [ForeignKey(nameof(FinanceCategory))]
         public int? FinancialRecordId { get; set; }

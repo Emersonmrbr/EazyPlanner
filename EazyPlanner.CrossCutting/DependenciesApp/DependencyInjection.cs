@@ -14,11 +14,19 @@ namespace EazyPlanner.CrossCutting.DependenciesApp
      IConfiguration configuration)
         {
             var connectionString = configuration
-                                  .GetConnectionString("PostgresString") ?? throw new InvalidOperationException("Connection string 'SystemConnection' not found.");
+                                  .GetConnectionString("SqlServerString") ?? throw new InvalidOperationException("Connection string 'PostgresString' not found.");
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
+            services.AddScoped<IBankrollAccountRepository, BankrollAccountRepository>();
+            services.AddScoped<IcostCenterRepository, CostCenterRepository>();
             services.AddScoped<ICustomerSupplierRepository, CustomerSupplierRepository>();
+            services.AddScoped<IFinanceCategoryRepository, FinanceCategoryRepository>();
+            services.AddScoped<IFinanceRecordRepository, FinanceRecordRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
+            services.AddScoped<IPeopleRepository, PeopleRepository>();
             //services.AddScoped<ILivroService, LivroService>();
 
             return services;

@@ -5,7 +5,7 @@ namespace EazyPlanner.Domain.Entities
 {
 
     [Table("People")]
-    public class People : AddressContact
+    public class People : _ContactBase
     {
         public People(int peopleId, string name, DateTime birthDate, string? genre, string? createdBy, DateTime? createDate, string? updateBy, DateTime? updateDate)
         {
@@ -34,18 +34,6 @@ namespace EazyPlanner.Domain.Entities
         [StringLength(10, ErrorMessage = "The Genre field cannot be longer than 10 characters")]
         [DataType(DataType.Text)]
         public string? Genre { get; set; }
-
-        [DataType(DataType.Text)]
-        public string? CreatedBy { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime? CreateDate { get; set; }
-
-        [DataType(DataType.Text)]
-        public string? UpdateBy { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime? UpdateDate { get; set; }
 
         [ForeignKey(nameof(FinanceCategory))]
         public int? FinancialRecordId { get; set; }

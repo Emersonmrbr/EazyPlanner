@@ -5,7 +5,7 @@ namespace EazyPlanner.Domain.Entities
 {
 
     [Table("FinancialRecord")]
-    public class FinancialRecord
+    public class FinancialRecord : _CreateBase
     {
         public FinancialRecord(int financialRecordId, string recordType, string description, DateTime dueDate, decimal plannedAmount, decimal? actualAmount, string? status, DateTime? receivedDate, string? account, string? client, string? category, string? costCenter, string? invoice, string? invoiceNumber, string? createdBy, DateTime? createDate, string? updateBy, DateTime? updateDate)
         {
@@ -83,18 +83,6 @@ namespace EazyPlanner.Domain.Entities
         [MaxLength(100, ErrorMessage = "Invoice must be at most 100 characters.")]
         [DataType(DataType.Text)]
         public string? InvoiceNumber { get; set; }
-
-        [DataType(DataType.Text)]
-        public string? CreatedBy { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime? CreateDate { get; set; }
-
-        [DataType(DataType.Text)]
-        public string? UpdateBy { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime? UpdateDate { get; set; }
 
         public ICollection<CustomerSupplier> CustomersSuppliers { get; } = new List<CustomerSupplier>();
         public ICollection<People> Peoples { get; } = new List<People>();

@@ -8,7 +8,6 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<CustomerSupplier> builder)
         {
-            builder.Property(p => p.CNPJ).HasMaxLength(20).IsRequired();
         }
     }
 }

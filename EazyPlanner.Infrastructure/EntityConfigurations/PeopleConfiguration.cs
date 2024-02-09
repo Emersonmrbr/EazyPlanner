@@ -8,7 +8,6 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<People> builder)
         {
-            builder.Property(p => p.Name).HasMaxLength(50).IsRequired();
         }
     }
 }

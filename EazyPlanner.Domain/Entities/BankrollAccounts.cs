@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace EazyPlanner.Domain.Entities
 {
     [Table("BankrollAccount")]
-    public class BankrollAccount
+    public class BankrollAccount : _CreateBase
     {
         public BankrollAccount(int bankrollAccountsId, string name, string? createdBy, DateTime? createDate, string? updateBy, DateTime? updateDate)
         {
@@ -24,20 +24,6 @@ namespace EazyPlanner.Domain.Entities
         [MaxLength(100, ErrorMessage = "Name must be at most 100 characters.")]
         [DataType(DataType.Text)]
         public required string Name { get; set; }
-
-        [DataType(DataType.Text)]
-        public string? CreatedBy { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [DataType(DataType.DateTime)]
-        public DateTime? CreateDate { get; set; }
-
-        [DataType(DataType.Text)]
-        public string? UpdateBy { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DataType(DataType.DateTime)]
-        public DateTime? UpdateDate { get; set; }
 
         [ForeignKey(nameof(FinanceCategory))]
         public int? FinancialRecordId { get; set; }

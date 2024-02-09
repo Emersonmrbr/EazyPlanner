@@ -8,7 +8,6 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<CostCenter> builder)
         {
-            builder.Property(p => p.Name).HasMaxLength(50).IsRequired();
         }
     }
 }

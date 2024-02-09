@@ -8,3 +8,10 @@
 @using Microsoft.JSInterop
 @using EazyPlanner.Presentation
 @using EazyPlanner.Presentation.Components
+
+@using EazyPlanner.Infrastructure.Repositories
+@using EazyPlanner.Domain.Entities
+@using EazyPlanner.Domain.Abstractions
+
+@inject ICustomerSupplierRepository customerSupplierRepository
+@inject NavigationManager navigation

@@ -2,7 +2,7 @@
 
 namespace EazyPlanner.Domain.Entities
 {
-    public class AddressContact
+    public class _ContactBase
     {
         [StringLength(100, ErrorMessage = "The Address street field cannot be longer than 100 characters")]
         [DataType(DataType.Text)]
@@ -53,6 +53,20 @@ namespace EazyPlanner.Domain.Entities
         public string? Email2 { get; set; }
 
         public byte[]? Image { get; set; }
+
+        [DataType(DataType.Text)]
+        [StringLength(50, ErrorMessage = "The Created by field cannot be longer than 50 characters")]
+        public string? CreatedBy { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? CreateDate { get; set; }
+
+        [DataType(DataType.Text)]
+        [StringLength(50, ErrorMessage = "The Update by field cannot be longer than 50 characters")]
+        public string? UpdateBy { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? UpdateDate { get; set; }
     }
 }
 

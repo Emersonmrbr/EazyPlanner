@@ -8,9 +8,8 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<FinancialRecord> builder)
         {
-            builder.Property(p => p.Description).HasMaxLength(255).IsRequired();
-            builder.Property(p => p.PlannedAmount).HasPrecision(10, 2).IsRequired();
-            builder.Property(p => p.ActualAmount).HasPrecision(10, 2);
+            builder.Property(p => p.PlannedAmount).HasColumnType("money").HasPrecision(20, 2).IsRequired();
+            builder.Property(p => p.ActualAmount).HasColumnType("money").HasPrecision(20, 2);
         }
     }
 }
