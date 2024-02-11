@@ -14,7 +14,7 @@ namespace EazyPlanner.CrossCutting.DependenciesApp
      IConfiguration configuration)
         {
             var connectionString = configuration
-                                  .GetConnectionString("SqlServerString") ?? throw new InvalidOperationException("Connection string 'PostgresString' not found.");
+                                  .GetConnectionString("SqlServerString") ?? throw new InvalidOperationException("Connection string 'SqlServerString' not found.");
 
             //services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));

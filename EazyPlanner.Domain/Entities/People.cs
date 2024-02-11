@@ -1,43 +1,30 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using EazyPlanner.Domain.Entities.Base;
 
 namespace EazyPlanner.Domain.Entities
 {
 
-    [Table("People")]
-    public class People : _ContactBase
+    public class People
     {
-        public People(int peopleId, string name, DateTime birthDate, string? genre, string? createdBy, DateTime? createDate, string? updateBy, DateTime? updateDate)
+        public People(int peopleId,
+                      string name,
+                      DateTime birthDate,
+                      string? genre,
+                      CreateBase? create)
         {
             PeopleId = peopleId;
             Name = name;
             BirthDate = birthDate;
             Genre = genre;
-            CreatedBy = createdBy;
-            CreateDate = createDate;
-            UpdateBy = updateBy;
-            UpdateDate = updateDate;
+            Create = create;
         }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PeopleId { get; private set; }
-
-        [Required(ErrorMessage = "The Name field is required")]
-        [StringLength(200, ErrorMessage = "The Name field cannot be longer than 200 characters")]
-        [DataType(DataType.Text)]
         public required string Name { get; set; }
-
-        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
-
-        [StringLength(10, ErrorMessage = "The Genre field cannot be longer than 10 characters")]
-        [DataType(DataType.Text)]
         public string? Genre { get; set; }
+        public CreateBase? Create { get; set; }
+        public int? CustomerSupplierId { get; set; }
 
-        [ForeignKey(nameof(FinanceCategory))]
-        public int? FinancialRecordId { get; set; }
-
-        public FinancialRecord? FinancialRecord { get; set; }
+        public List<CustomerSupplier>? CustomerSuppliers { get; set; }
     }
 }

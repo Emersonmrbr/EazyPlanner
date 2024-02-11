@@ -1,32 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using EazyPlanner.Domain.Entities.Base;
 
 namespace EazyPlanner.Domain.Entities
 {
-    [Table("PaymentMethod")]
-    public class PaymentMethod : _CreateBase
+    public class PaymentMethod
     {
-        public PaymentMethod(int paymentMethodId, string name, string? createdBy, DateTime? createDate, string? updateBy, DateTime? updateDate)
+        public PaymentMethod(int paymentMethodId,
+                             string name,
+                            CreateBase? create)
         {
             PaymentMethodId = paymentMethodId;
             Name = name;
-            CreatedBy = createdBy;
-            CreateDate = createDate;
-            UpdateBy = updateBy;
-            UpdateDate = updateDate;
+            Create = create;
         }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PaymentMethodId { get; private set; }
-
-        [Required(ErrorMessage = "Name is required.")]
-        [MaxLength(100, ErrorMessage = "Name must be at most 100 characters.")]
         public required string Name { get; set; }
-
-        [ForeignKey(nameof(FinanceCategory))]
+        public CreateBase? Create { get; set; }
         public int? FinancialRecordId { get; set; }
 
-        public FinancialRecord? FinancialRecord { get; set; }
     }
 }

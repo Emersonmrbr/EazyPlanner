@@ -1,60 +1,36 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using EazyPlanner.Domain.Entities.Base;
 
 namespace EazyPlanner.Domain.Entities
 {
-    [Table("CustomerSupplier")]
-    public class CustomerSupplier : _ContactBase
+    public class CustomerSupplier
     {
-        public CustomerSupplier(int customerSupplierId, string cNPJ, string companyName, string? companyFantasy, string? people, string? provinceId, string? cityId, string? createdBy, DateTime? createDate, string? updateBy, DateTime? updateDate)
+        public CustomerSupplier(int customerSupplierId,
+                                string cNPJ,
+                                string companyName,
+                                string? companyFantasy,
+                                string? provinceId,
+                                string? cityId,
+                                AddressBase? address,
+                                CreateBase? create)
         {
             CustomerSupplierId = customerSupplierId;
             CNPJ = cNPJ;
             CompanyName = companyName;
             CompanyFantasy = companyFantasy;
-            People = people;
             ProvinceId = provinceId;
             CityId = cityId;
-            CreatedBy = createdBy;
-            CreateDate = createDate;
-            UpdateBy = updateBy;
-            UpdateDate = updateDate;
+            Address = address;
+            Create = create;
         }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CustomerSupplierId { get; private set; }
-
-        [Required(ErrorMessage = "The CNPJ field is required")]
-        [StringLength(50, ErrorMessage = "The CNPJ field must be 50 characters")]
-        [DataType(DataType.Text)]
-        public string CNPJ { get; set; }
-
-        [Required(ErrorMessage = "The Company name field is required")]
-        [StringLength(200, ErrorMessage = "The Company name field cannot be longer than 200 characters")]
-        [DataType(DataType.Text)]
-        public string CompanyName { get; set; }
-
-        [StringLength(100, ErrorMessage = "The Company fantasy field cannot be longer than 100 characters")]
-        [DataType(DataType.Text)]
-        public string? CompanyFantasy { get; set; }
-
-        [StringLength(200, ErrorMessage = "The People field cannot be longer than 200 characters")]
-        [DataType(DataType.Text)]
-        public string? People { get; set; }
-
-        [StringLength(30, ErrorMessage = "The Province id field cannot be longer than 30 characters")]
-        [DataType(DataType.Text)]
-        public string? ProvinceId { get; set; }
-
-        [StringLength(30, ErrorMessage = "The City id field cannot be longer than 30 characters")]
-        [DataType(DataType.Text)]
-        public string? CityId { get; set; }
-
-        [ForeignKey(nameof(FinanceCategory))]
-        public int? FinancialRecordId { get; set; }
-
-        public FinancialRecord? FinancialRecord { get; set; }
+        public string CNPJ { get; set; } = string.Empty;
+        public string CompanyName { get; set; } = string.Empty;
+        public string? CompanyFantasy { get; set; } = null;
+        public string? ProvinceId { get; set; } = null;
+        public string? CityId { get; set; } = null;
+        public AddressBase? Address { get; set; }
+        public CreateBase? Create { get; set; }
 
     }
 }

@@ -1,12 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using EazyPlanner.Domain.Entities.Base;
 
 namespace EazyPlanner.Domain.Entities
 {
-    [Table("Invoice")]
-    public class Invoice : _CreateBase
+    public class Invoice
     {
-        public Invoice(int invoiceId, string name, string number, decimal amount, DateTime date, string file, string? createdBy, DateTime? createDate, string? updateBy, DateTime? updateDate)
+        public Invoice(int invoiceId,
+                       string name,
+                       string number,
+                       decimal amount,
+                       DateTime date,
+                       string file,
+                       CreateBase? create)
         {
             InvoiceId = invoiceId;
             Name = name;
@@ -14,42 +20,16 @@ namespace EazyPlanner.Domain.Entities
             Amount = amount;
             Date = date;
             File = file;
-            CreatedBy = createdBy;
-            CreateDate = createDate;
-            UpdateBy = updateBy;
-            UpdateDate = updateDate;
+            Create = create;
         }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int InvoiceId { get; private set; }
-
-        [Required(ErrorMessage = "Name is required.")]
-        [MaxLength(255, ErrorMessage = "Name must be at most 255 characters.")]
-        [DataType(DataType.Text)]
         public required string Name { get; set; }
-
-        [Required(ErrorMessage = "Number is required.")]
-        [MaxLength(255, ErrorMessage = "Number must be at most 255 characters.")]
-        [DataType(DataType.Text)]
         public required string Number { get; set; }
-
-        [Required(ErrorMessage = "Amount is required.")]
-        [DataType(DataType.Currency)]
         public required decimal Amount { get; set; }
-
-        [Required(ErrorMessage = "Date is required.")]
-        [DataType(DataType.Date)]
         public required DateTime Date { get; set; }
-
-        [Required(ErrorMessage = "File is required.")]
-        [MaxLength(255, ErrorMessage = "File must be at most 255 characters.")]
-        [DataType(DataType.Text)]
         public required string File { get; set; }
-
-        [ForeignKey(nameof(FinanceCategory))]
+        public CreateBase? Create { get; set; }
         public int? FinancialRecordId { get; set; }
-
-        public FinancialRecord? FinancialRecord { get; set; }
     }
 }
