@@ -1,22 +1,15 @@
-﻿using EazyPlanner.Domain.Entities.Base;
+﻿using EazyPlanner.Domain.Base;
 
 namespace EazyPlanner.Domain.Entities
 {
-    public class PaymentMethod
+    public class PaymentMethod(int paymentMethodId,
+                         string name)
     {
-        public PaymentMethod(int paymentMethodId,
-                             string name,
-                            CreateBase? create)
-        {
-            PaymentMethodId = paymentMethodId;
-            Name = name;
-            Create = create;
-        }
-
-        public int PaymentMethodId { get; private set; }
-        public required string Name { get; set; }
+        public int PaymentMethodId { get; private set; } = paymentMethodId;
+        public required string Name { get; set; } = name;
         public CreateBase? Create { get; set; }
-        public int? FinancialRecordId { get; set; }
+
+        public ICollection<FinancialRecord>? FinancialRecords { get; private set; }
 
     }
 }

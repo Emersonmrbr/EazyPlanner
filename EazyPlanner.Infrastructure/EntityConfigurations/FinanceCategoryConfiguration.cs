@@ -8,6 +8,7 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<FinanceCategory> builder)
         {
+            builder.ComplexProperty(c => c.Create).IsRequired();
         }
     }
 }

@@ -1,8 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace EazyPlanner.Domain.Entities.Base
+﻿namespace EazyPlanner.Domain.Base
 {
-    [ComplexType]
     public class CreateBase(string? createdBy,
                             DateTime? createDate,
                             string? updateBy,
@@ -14,3 +11,4 @@ namespace EazyPlanner.Domain.Entities.Base
         public DateTime? UpdateDate { get; set; } = updateDate;
     }
 }
+

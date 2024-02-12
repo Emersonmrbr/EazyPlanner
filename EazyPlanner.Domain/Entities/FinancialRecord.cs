@@ -1,82 +1,41 @@
-﻿using EazyPlanner.Domain.Entities.Base;
+﻿using EazyPlanner.Domain.Base;
 
 namespace EazyPlanner.Domain.Entities
 {
 
-    public class FinancialRecord
+    public class FinancialRecord(int financialRecordId,
+                           string recordType,
+                           string description,
+                           DateTime dueDate,
+                           decimal plannedAmount,
+                           decimal? actualAmount,
+                           DateTime? receivedDate,
+                           string? status)
     {
-        public FinancialRecord(int financialRecordId,
-                               string recordType,
-                               string description,
-                               DateTime dueDate,
-                               decimal plannedAmount,
-                               decimal? actualAmount,
-                               string? status,
-                               DateTime? receivedDate,
-                               string? account,
-                               string? client,
-                               string? category,
-                               string? costCenter,
-                               string? invoice,
-                               string? invoiceNumber,
-                               CreateBase create)
-        {
-            FinancialRecordId = financialRecordId;
-            RecordType = recordType;
-            Description = description;
-            DueDate = dueDate;
-            PlannedAmount = plannedAmount;
-            ActualAmount = actualAmount;
-            Status = status;
-            ReceivedDate = receivedDate;
-            Account = account;
-            Client = client;
-            Category = category;
-            CostCenter = costCenter;
-            Invoice = invoice;
-            InvoiceNumber = invoiceNumber;
-            Create = create;
-        }
+        public int FinancialRecordId { get; private set; } = financialRecordId;
 
-        public int FinancialRecordId { get; private set; }
+        public required string RecordType { get; set; } = recordType;
 
-        public required string RecordType { get; set; }
+        public required string Description { get; set; } = description;
+        public required DateTime DueDate { get; set; } = dueDate;
 
-        public required string Description { get; set; }
-        public required DateTime DueDate { get; set; }
-
-        public required decimal PlannedAmount { get; set; }
-        public decimal? ActualAmount { get; set; }
-
-        public string? Status { get; set; }
-        public DateTime? ReceivedDate { get; set; }
-
-        public string? Account { get; set; }
-
-        public string? Client { get; set; }
-
-        public string? Category { get; set; }
-
-        public string? CostCenter { get; set; }
-
-        public string? Invoice { get; set; }
-
-        public string? InvoiceNumber { get; set; }
+        public required decimal PlannedAmount { get; set; } = plannedAmount;
+        public DateTime? ReceivedDate { get; set; } = receivedDate;
+        public decimal? ActualAmount { get; set; } = actualAmount;
+        public string? Status { get; set; } = status;
         public CreateBase? Create { get; set; }
+
         public int? BankrollAccountId { get; set; }
+        public BankrollAccount? BankrollAccount { get; private set; }
         public int? CosteCenterId { get; set; }
+        public CostCenter? CostCenter { get; private set; }
         public int? CustomerSupplierId { get; set; }
+        public CustomerSupplier? CustomerSupplier { get; private set; }
         public int? FinanceCategoryId { get; set; }
+        public FinanceCategory? FinanceCategory { get; private set; }
         public int? InvoiceId { get; set; }
+        public Invoice? Invoice { get; private set; }
         public int? PaymentMethodId { get; set; }
-
-        public List<BankrollAccount>? BankrollAccounts { get; set; }
-        public List<CostCenter>? CostCenters { get; set; }
-        public List<CustomerSupplier>? CustomerSuppliers { get; set; }
-        public List<FinanceCategory>? FinanceCategories { get; set; }
-        public List<Invoice>? Invoices { get; set; }
-        public List<PaymentMethod>? PaymentMethods { get; set; }
-
-
+        public PaymentMethod? PaymentMethod { get; private set; }
     }
 }

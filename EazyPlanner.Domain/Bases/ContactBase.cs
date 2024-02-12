@@ -1,8 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace EazyPlanner.Domain.Entities.Base
+﻿namespace EazyPlanner.Domain.Base
 {
-    [ComplexType]
     public class ContactBase(string? phone1,
                              string? phone2,
                              string? email1,

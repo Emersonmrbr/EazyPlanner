@@ -1,21 +1,14 @@
-﻿using EazyPlanner.Domain.Entities.Base;
+﻿using EazyPlanner.Domain.Base;
 
 namespace EazyPlanner.Domain.Entities
 {
-    public class BankrollAccount
+    public class BankrollAccount(int bankrollAccountId,
+                           string name)
     {
-        public BankrollAccount(int bankrollAccountId,
-                               string name,
-                               CreateBase? create)
-        {
-            BankrollAccountId = bankrollAccountId;
-            Name = name;
-            Create = create!;
-        }
-
-        public int BankrollAccountId { get; private set; }
-        public required string Name { get; set; }
+        public int BankrollAccountId { get; private set; } = bankrollAccountId;
+        public required string Name { get; set; } = name;
         public CreateBase? Create { get; set; }
-        public int? FinancialRecordId { get; set; }
+
+        public ICollection<FinancialRecord>? FinancialRecords { get; private set; }
     }
 }

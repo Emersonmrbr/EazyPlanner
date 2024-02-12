@@ -1,8 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace EazyPlanner.Domain.Entities.Base
+﻿namespace EazyPlanner.Domain.Base
 {
-    [ComplexType]
     public class AddressBase(string? streetName,
                              string? buildingNumber,
                              string? secondaryAddress,

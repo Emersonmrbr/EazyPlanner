@@ -1,21 +1,14 @@
-﻿using EazyPlanner.Domain.Entities.Base;
+﻿using EazyPlanner.Domain.Base;
 
 namespace EazyPlanner.Domain.Entities
 {
-    public class FinanceCategory
+    public class FinanceCategory(int financeCategoryId,
+                           string name)
     {
-        public FinanceCategory(int financeCategoryId,
-                               string name,
-                               CreateBase? create)
-        {
-            FinanceCategoryId = financeCategoryId;
-            Name = name;
-            Create = create;
-        }
-
-        public int FinanceCategoryId { get; private set; }
-        public required string Name { get; set; }
+        public int FinanceCategoryId { get; private set; } = financeCategoryId;
+        public required string Name { get; set; } = name;
         public CreateBase? Create { get; set; }
-        public int? FinancialRecordId { get; set; }
+
+        public ICollection<FinancialRecord>? FinancialRecords { get; private set; }
     }
 }

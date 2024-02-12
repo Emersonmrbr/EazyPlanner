@@ -56,23 +56,23 @@ else
         <div class="row g-2 mb-3">
             <div class="col-md-2">
                 <div class="form-floating">
-                    <InputText @bind-Value="customerSupplier.ZipCode" id="zipCode" placeholder="00000-000" class="form-control"></InputText>
+                    <InputText @bind-Value="customerSupplier!.Address!.ZipCode" id="zipCode" placeholder="00000-000" class="form-control"></InputText>
                     <label for="zipCode">Zip Code</label>
-                    <ValidationMessage For="@(() => customerSupplier.ZipCode )" />
+                    <ValidationMessage For="@(() => customerSupplier.Address.ZipCode )" />
                 </div>
             </div>
             <div class="col-md">
                 <div class="form-floating">
-                    <InputText @bind-Value="customerSupplier.StreetName" id="streetName" placeholder="Street name" class="form-control"></InputText>
+                    <InputText @bind-Value="customerSupplier.Address.StreetName" id="streetName" placeholder="Street name" class="form-control"></InputText>
                     <label for="streetName">Street name</label>
-                    <ValidationMessage For="@(() => customerSupplier.StreetName )" />
+                    <ValidationMessage For="@(() => customerSupplier.Address.StreetName )" />
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-floating">
-                    <InputText @bind-Value="customerSupplier.BuildingNumber" id="buildingNumber" placeholder="00000" class="form-control"></InputText>
+                    <InputText @bind-Value="customerSupplier.Address.BuildingNumber" id="buildingNumber" placeholder="00000" class="form-control"></InputText>
                     <label for="buildingNumber">Building number</label>
-                    <ValidationMessage For="@(() => customerSupplier.BuildingNumber )" />
+                    <ValidationMessage For="@(() => customerSupplier.Address.BuildingNumber )" />
                 </div>
             </div>
         </div>
@@ -80,30 +80,30 @@ else
         <div class="row g-2 mb-3">
             <div class="col-md">
                 <div class="form-floating">
-                    <InputText @bind-Value="customerSupplier.SecondaryAddress" id="secondaryAddress" placeholder="Bl 00 Ap 00" class="form-control"></InputText>
+                    <InputText @bind-Value="customerSupplier.Address.SecondaryAddress" id="secondaryAddress" placeholder="Bl 00 Ap 00" class="form-control"></InputText>
                     <label for="secondaryAddress">Secondary address</label>
-                    <ValidationMessage For="@(() => customerSupplier.SecondaryAddress )" />
+                    <ValidationMessage For="@(() => customerSupplier.Address.SecondaryAddress )" />
                 </div>
             </div>
             <div class="col-md">
                 <div class="form-floating">
-                    <InputText @bind-Value="customerSupplier.City" id="city" placeholder="City" class="form-control"></InputText>
+                    <InputText @bind-Value="customerSupplier.Address.City" id="city" placeholder="City" class="form-control"></InputText>
                     <label for="city">City</label>
-                    <ValidationMessage For="@(() => customerSupplier.City )" />
+                    <ValidationMessage For="@(() => customerSupplier.Address.City )" />
                 </div>
             </div>
             <div class="col-md">
                 <div class="form-floating">
-                    <InputText @bind-Value="customerSupplier.State" id="state" placeholder="State" class="form-control"></InputText>
+                    <InputText @bind-Value="customerSupplier.Address.State" id="state" placeholder="State" class="form-control"></InputText>
                     <label for="state">State</label>
-                    <ValidationMessage For="@(() => customerSupplier.State )" />
+                    <ValidationMessage For="@(() => customerSupplier.Address.State )" />
                 </div>
             </div>
             <div class="col-md">
                 <div class="form-floating">
-                    <InputText @bind-Value="customerSupplier.Country" id="country" placeholder="Country" class="form-control"></InputText>
+                    <InputText @bind-Value="customerSupplier.Address.Country" id="country" placeholder="Country" class="form-control"></InputText>
                     <label for="country">Country</label>
-                    <ValidationMessage For="@(() => customerSupplier.Country )" />
+                    <ValidationMessage For="@(() => customerSupplier.Address.Country )" />
                 </div>
             </div>
         </div>
@@ -121,25 +121,20 @@ else
         Logger.LogInformation("CNPJ {cnpj}", customerSupplier?.CNPJ);
         // var newCustomerSupplier = (CustomerSupplier)editContext.Model;
         // newCustomerSupplier.CNPJ = customerSupplier.CNPJ;
-        customerSupplier!.CreateDate = DateTime.Now;
-        customerSupplier.CreatedBy = "Emerson Martins Brito";
+        customerSupplier!.Create!.CreateDate = DateTime.Now;
+        customerSupplier.Create.CreatedBy = "Emerson Martins Brito";
         await customerSupplierRepository.AddCustomerSupplier(customerSupplier!);
         navigation.NavigateTo("/");
     }
 
-    protected override void OnInitialized() =>
-            customerSupplier ??= new CustomerSupplier(
-            0,
-            string.Empty,
-            string.Empty,
-            string.Empty,
-            string.Empty,
-            string.Empty,
-            string.Empty,
-            string.Empty,
-            DateTime.Now,
-            string.Empty,
-            DateTime.Now
-        );
+    protected override void OnInitialized() { }
+    //     customerSupplier ??= new CustomerSupplier(
+    //     0,
+    //     string.Empty,
+    //     string.Empty,
+    //     string.Empty,
+    //     string.Empty,
+    //     string.Empty
+    // );
 
 }

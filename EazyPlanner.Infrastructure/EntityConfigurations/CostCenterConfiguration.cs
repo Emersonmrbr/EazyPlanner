@@ -8,6 +8,7 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<CostCenter> builder)
         {
+            builder.ComplexProperty(c => c.Create).IsRequired();
         }
     }
 }

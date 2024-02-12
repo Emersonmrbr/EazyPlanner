@@ -1,35 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using EazyPlanner.Domain.Entities.Base;
+﻿using EazyPlanner.Domain.Base;
 
 namespace EazyPlanner.Domain.Entities
 {
-    public class Invoice
+    public class Invoice(int invoiceId,
+                   string name,
+                   string number,
+                   decimal amount,
+                   DateTime date,
+                   string file)
     {
-        public Invoice(int invoiceId,
-                       string name,
-                       string number,
-                       decimal amount,
-                       DateTime date,
-                       string file,
-                       CreateBase? create)
-        {
-            InvoiceId = invoiceId;
-            Name = name;
-            Number = number;
-            Amount = amount;
-            Date = date;
-            File = file;
-            Create = create;
-        }
-
-        public int InvoiceId { get; private set; }
-        public required string Name { get; set; }
-        public required string Number { get; set; }
-        public required decimal Amount { get; set; }
-        public required DateTime Date { get; set; }
-        public required string File { get; set; }
+        public int InvoiceId { get; private set; } = invoiceId;
+        public required string Name { get; set; } = name;
+        public required string Number { get; set; } = number;
+        public required decimal Amount { get; set; } = amount;
+        public required DateTime Date { get; set; } = date;
+        public required string File { get; set; } = file;
         public CreateBase? Create { get; set; }
-        public int? FinancialRecordId { get; set; }
+
+        public ICollection<FinancialRecord>? FinancialRecords { get; set; }
     }
 }

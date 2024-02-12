@@ -8,7 +8,8 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Invoice> builder)
         {
-            builder.Property(p => p.Amount).IsRequired().HasPrecision(20, 2);
+            builder.ComplexProperty(c => c.Create).IsRequired();
+            builder.Property(p => p.Amount).IsRequired().HasPrecision(10, 2);
         }
     }
 }
