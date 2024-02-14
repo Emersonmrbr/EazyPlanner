@@ -1,7 +1,6 @@
 ﻿using EazyPlanner.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace EazyPlanner.Infrastructure.EntityConfigurations
 {
@@ -9,6 +8,10 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<People> builder)
         {
+            builder.HasKey(pk => pk.PeopleId);
+            builder.Property(p => p.Name).HasMaxLength(100).IsRequired();
+            builder.Property(p => p.BirthDate).HasColumnType("date").IsRequired();
+
             builder.ComplexProperty(c => c.Create).IsRequired();
         }
     }

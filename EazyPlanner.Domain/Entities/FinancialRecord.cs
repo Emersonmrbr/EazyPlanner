@@ -4,24 +4,21 @@ namespace EazyPlanner.Domain.Entities
 {
 
     public class FinancialRecord(int financialRecordId,
-                           string recordType,
                            string description,
                            DateTime dueDate,
                            decimal plannedAmount,
                            decimal? actualAmount,
                            DateTime? receivedDate,
+                           string recordType,
                            string? status)
     {
         public int FinancialRecordId { get; private set; } = financialRecordId;
-
-        public required string RecordType { get; set; } = recordType;
-
         public required string Description { get; set; } = description;
         public required DateTime DueDate { get; set; } = dueDate;
-
         public required decimal PlannedAmount { get; set; } = plannedAmount;
         public DateTime? ReceivedDate { get; set; } = receivedDate;
         public decimal? ActualAmount { get; set; } = actualAmount;
+        public required string RecordType { get; set; } = recordType;
         public string? Status { get; set; } = status;
         public CreateBase? Create { get; set; }
 

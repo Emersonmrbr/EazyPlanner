@@ -1,6 +1,6 @@
-using EazyPlanner.Presentation.Components;
 using EazyPlanner.CrossCutting.DependenciesApp;
 using EazyPlanner.Infrastructure.Context;
+using EazyPlanner.Presentation.Components;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

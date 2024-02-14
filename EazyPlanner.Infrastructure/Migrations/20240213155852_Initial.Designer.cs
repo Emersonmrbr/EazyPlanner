@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EazyPlanner.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240212221303_Initial")]
+    [Migration("20240213155852_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

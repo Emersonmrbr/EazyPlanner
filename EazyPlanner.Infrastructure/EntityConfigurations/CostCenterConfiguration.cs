@@ -8,6 +8,9 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<CostCenter> builder)
         {
+            builder.HasKey(pk => pk.CostCenterId);
+            builder.Property(p => p.Name).HasMaxLength(100).IsRequired();
+
             builder.ComplexProperty(c => c.Create).IsRequired();
         }
     }

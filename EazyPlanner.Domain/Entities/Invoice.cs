@@ -17,6 +17,6 @@ namespace EazyPlanner.Domain.Entities
         public required string File { get; set; } = file;
         public CreateBase? Create { get; set; }
 
-        public ICollection<FinancialRecord>? FinancialRecords { get; set; }
+        public ICollection<FinancialRecord>? FinancialRecords { get; set; } = new List<FinancialRecord>();
     }
 }

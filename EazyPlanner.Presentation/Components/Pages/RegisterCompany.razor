@@ -14,21 +14,21 @@ else
         <div class="row g-2 mb-3">
             <div class="col-md-2">
                 <div class="form-floating">
-                    <InputText @bind-Value="customerSupplier.CNPJ" id="cnpj" @* placeholder="00.000.000/0000-00" *@ class="form-control"></InputText>
+                    <InputText @bind-Value="customerSupplier.CNPJ" id="cnpj" placeholder="00.000.000/0000-00" class="form-control"></InputText>
                     <label for="cnpj">CNPJ</label>
                     <ValidationMessage For="@(() => customerSupplier.CNPJ )" />
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="form-floating">
-                    <InputText @bind-Value="customerSupplier.CompanyName" id="companyName" placeholder="Eazy Planner" class="form-control"></InputText>
+                    <InputText @bind-Value="customerSupplier.CompanyName" id="companyName" placeholder="Company name" class="form-control"></InputText>
                     <label for="companyName">Company Name</label>
                     <ValidationMessage For="@(() => customerSupplier.CompanyName )" />
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="form-floating">
-                    <InputText @bind-Value="customerSupplier.CompanyFantasy" id="companyFantasy" placeholder="Eazy Planner" class="form-control"></InputText>
+                    <InputText @bind-Value="customerSupplier.CompanyFantasy" id="companyFantasy" placeholder="Company fantasy" class="form-control"></InputText>
                     <label for="companyFantasy">Company Fantasy</label>
                     <ValidationMessage For="@(() => customerSupplier.CompanyFantasy )" />
                 </div>
@@ -38,7 +38,7 @@ else
         <div class="row g-2 mb-3">
             <div class="col-md">
                 <div class="form-floating">
-                    <InputText @bind-Value="customerSupplier.ProvinceId" id="provinceId" placeholder="000000000" class="form-control"></InputText>
+                    <InputText @bind-Value="customerSupplier.ProvinceId" id="provinceId" placeholder="00000000000" class="form-control"></InputText>
                     <label for="provinceId">Province ID</label>
                     <ValidationMessage For="@(() => customerSupplier.ProvinceId )" />
 
@@ -46,8 +46,8 @@ else
             </div>
             <div class="col-md">
                 <div class="form-floating">
-                    <InputText @bind-Value="customerSupplier.CityId" id="cnpj" placeholder="00 00 0000000-0" class="form-control"></InputText>
-                    <label for="cnpj">City ID</label>
+                    <InputText @bind-Value="customerSupplier.CityId" id="cityId" placeholder="00000000000" class="form-control"></InputText>
+                    <label for="cityId">City ID</label>
                     <ValidationMessage For="@(() => customerSupplier.CityId )" />
                 </div>
             </div>
@@ -56,7 +56,7 @@ else
         <div class="row g-2 mb-3">
             <div class="col-md-2">
                 <div class="form-floating">
-                    <InputText @bind-Value="customerSupplier!.Address!.ZipCode" id="zipCode" placeholder="00000-000" class="form-control"></InputText>
+                    <InputText @bind-Value="customerSupplier!.Address!.ZipCode" id="zipCode" placeholder="00.000-000" class="form-control"></InputText>
                     <label for="zipCode">Zip Code</label>
                     <ValidationMessage For="@(() => customerSupplier.Address.ZipCode )" />
                 </div>
@@ -70,7 +70,7 @@ else
             </div>
             <div class="col-md-2">
                 <div class="form-floating">
-                    <InputText @bind-Value="customerSupplier.Address.BuildingNumber" id="buildingNumber" placeholder="00000" class="form-control"></InputText>
+                    <InputText @bind-Value="customerSupplier.Address.BuildingNumber" id="buildingNumber" placeholder="0000" class="form-control"></InputText>
                     <label for="buildingNumber">Building number</label>
                     <ValidationMessage For="@(() => customerSupplier.Address.BuildingNumber )" />
                 </div>
@@ -80,7 +80,7 @@ else
         <div class="row g-2 mb-3">
             <div class="col-md">
                 <div class="form-floating">
-                    <InputText @bind-Value="customerSupplier.Address.SecondaryAddress" id="secondaryAddress" placeholder="Bl 00 Ap 00" class="form-control"></InputText>
+                    <InputText @bind-Value="customerSupplier.Address.SecondaryAddress" id="secondaryAddress" placeholder="SecondaryAddress" class="form-control"></InputText>
                     <label for="secondaryAddress">Secondary address</label>
                     <ValidationMessage For="@(() => customerSupplier.Address.SecondaryAddress )" />
                 </div>
@@ -121,20 +121,17 @@ else
         Logger.LogInformation("CNPJ {cnpj}", customerSupplier?.CNPJ);
         // var newCustomerSupplier = (CustomerSupplier)editContext.Model;
         // newCustomerSupplier.CNPJ = customerSupplier.CNPJ;
-        customerSupplier!.Create!.CreateDate = DateTime.Now;
+        customerSupplier!.Create!.CreateAt = DateTime.Now;
         customerSupplier.Create.CreatedBy = "Emerson Martins Brito";
         await customerSupplierRepository.AddCustomerSupplier(customerSupplier!);
         navigation.NavigateTo("/");
     }
 
-    protected override void OnInitialized() { }
-    //     customerSupplier ??= new CustomerSupplier(
-    //     0,
-    //     string.Empty,
-    //     string.Empty,
-    //     string.Empty,
-    //     string.Empty,
-    //     string.Empty
-    // );
-
+    protected override void OnInitialized()
+    {
+        customerSupplier ??= new CustomerSupplier(0, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
+        customerSupplier.Address ??= new AddressBase(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
+        customerSupplier.Create ??= new CreateBase(string.Empty, DateTime.Now, string.Empty, DateTime.Now);
+        customerSupplier.Contact ??= new ContactBase(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, []);
+    }
 }

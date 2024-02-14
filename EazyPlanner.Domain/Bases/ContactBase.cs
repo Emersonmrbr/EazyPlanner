@@ -1,18 +1,27 @@
 ﻿namespace EazyPlanner.Domain.Base
 {
-    public class ContactBase(string? phone1,
-                             string? phone2,
-                             string? email1,
-                             string? email2,
-                             string? website,
-                             byte[]? image)
+    public class ContactBase
     {
-        public string? Phone1 { get; set; } = phone1;
-        public string? Phone2 { get; set; } = phone2;
-        public string? Email1 { get; set; } = email1;
-        public string? Email2 { get; set; } = email2;
-        public string? Website { get; set; } = website;
-        public byte[]? Image { get; set; } = image;
+        public ContactBase(string? phone1,
+                                 string? phone2,
+                                 string? email1,
+                                 string? email2,
+                                 string? website,
+        byte[]? image)
+        {
+            Phone1 = phone1;
+            Phone2 = phone2;
+            Email1 = email1;
+            Email2 = email2;
+            Website = website;
+            Image = image;
+        }
+        public string? Phone1 { get; set; }
+        public string? Phone2 { get; set; }
+        public string? Email1 { get; set; }
+        public string? Email2 { get; set; }
+        public string? Website { get; set; }
+        public byte[]? Image { get; set; }
     }
 }
 

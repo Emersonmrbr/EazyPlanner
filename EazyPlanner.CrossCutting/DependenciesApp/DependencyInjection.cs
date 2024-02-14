@@ -1,8 +1,8 @@
 ﻿using EazyPlanner.Domain.Abstractions;
 using EazyPlanner.Infrastructure.Context;
 using EazyPlanner.Infrastructure.Repositories;
-using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 
