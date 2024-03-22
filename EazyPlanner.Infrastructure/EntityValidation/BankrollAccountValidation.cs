@@ -1,6 +1,15 @@
-﻿namespace EazyPlanner.Infrastructure.EntityValidation
+﻿using EazyPlanner.Domain.Entities;
+using FluentValidation;
+
+namespace EazyPlanner.Infrastructure.EntityValidation
 {
-    internal class BankrollAccountValidation
+    public class BankrollAccountValidation : AbstractValidator<BankrollAccount>
     {
+        public BankrollAccountValidation()
+        {
+            RuleFor(bankroll => bankroll.Name).NotEmpty();
+        }
     }
+
+
 }

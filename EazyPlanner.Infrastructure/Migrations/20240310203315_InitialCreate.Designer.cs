@@ -4,55 +4,58 @@ using System.Collections.Generic;
 using EazyPlanner.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace EazyPlanner.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240213155852_Initial")]
-    partial class Initial
+    [Migration("20240310203315_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.1")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("EazyPlanner.Domain.Entities.BankrollAccount", b =>
                 {
                     b.Property<int>("BankrollAccountId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BankrollAccountId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BankrollAccountId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.ComplexProperty<Dictionary<string, object>>("Create", "EazyPlanner.Domain.Entities.BankrollAccount.Create#CreateBase", b1 =>
                         {
                             b1.IsRequired();
 
-                            b1.Property<DateTime?>("CreateDate")
-                                .HasColumnType("datetime2");
+                            b1.Property<DateTime>("CreateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("CreatedBy")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<DateTime>("UpdateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("UpdateBy")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<DateTime?>("UpdateDate")
-                                .HasColumnType("datetime2");
+                                .IsRequired()
+                                .HasColumnType("text");
                         });
 
                     b.HasKey("BankrollAccountId");
@@ -64,29 +67,32 @@ namespace EazyPlanner.Infrastructure.Migrations
                 {
                     b.Property<int>("CostCenterId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CostCenterId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CostCenterId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.ComplexProperty<Dictionary<string, object>>("Create", "EazyPlanner.Domain.Entities.CostCenter.Create#CreateBase", b1 =>
                         {
                             b1.IsRequired();
 
-                            b1.Property<DateTime?>("CreateDate")
-                                .HasColumnType("datetime2");
+                            b1.Property<DateTime>("CreateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("CreatedBy")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<DateTime>("UpdateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("UpdateBy")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<DateTime?>("UpdateDate")
-                                .HasColumnType("datetime2");
+                                .IsRequired()
+                                .HasColumnType("text");
                         });
 
                     b.HasKey("CostCenterId");
@@ -98,51 +104,66 @@ namespace EazyPlanner.Infrastructure.Migrations
                 {
                     b.Property<int>("CustomerSupplierId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerSupplierId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CustomerSupplierId"));
 
                     b.Property<string>("CNPJ")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("CityId")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
 
                     b.Property<string>("CompanyFantasy")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("ProvinceId")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
 
                     b.ComplexProperty<Dictionary<string, object>>("Address", "EazyPlanner.Domain.Entities.CustomerSupplier.Address#AddressBase", b1 =>
                         {
                             b1.IsRequired();
 
                             b1.Property<string>("BuildingNumber")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
 
                             b1.Property<string>("City")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
 
                             b1.Property<string>("Country")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
 
                             b1.Property<string>("SecondaryAddress")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
 
                             b1.Property<string>("State")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
 
                             b1.Property<string>("StreetName")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
 
                             b1.Property<string>("ZipCode")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
                         });
 
                     b.ComplexProperty<Dictionary<string, object>>("Contact", "EazyPlanner.Domain.Entities.CustomerSupplier.Contact#ContactBase", b1 =>
@@ -150,39 +171,47 @@ namespace EazyPlanner.Infrastructure.Migrations
                             b1.IsRequired();
 
                             b1.Property<string>("Email1")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
 
                             b1.Property<string>("Email2")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
 
-                            b1.Property<byte[]>("Image")
-                                .HasColumnType("varbinary(max)");
+                            b1.Property<string>("Image")
+                                .IsRequired()
+                                .HasColumnType("text");
 
                             b1.Property<string>("Phone1")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
 
                             b1.Property<string>("Phone2")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
 
                             b1.Property<string>("Website")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
                         });
 
                     b.ComplexProperty<Dictionary<string, object>>("Create", "EazyPlanner.Domain.Entities.CustomerSupplier.Create#CreateBase", b1 =>
                         {
                             b1.IsRequired();
 
-                            b1.Property<DateTime?>("CreateDate")
-                                .HasColumnType("datetime2");
+                            b1.Property<DateTime>("CreateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("CreatedBy")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<DateTime>("UpdateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("UpdateBy")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<DateTime?>("UpdateDate")
-                                .HasColumnType("datetime2");
+                                .IsRequired()
+                                .HasColumnType("text");
                         });
 
                     b.HasKey("CustomerSupplierId");
@@ -194,29 +223,32 @@ namespace EazyPlanner.Infrastructure.Migrations
                 {
                     b.Property<int>("FinanceCategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FinanceCategoryId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FinanceCategoryId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.ComplexProperty<Dictionary<string, object>>("Create", "EazyPlanner.Domain.Entities.FinanceCategory.Create#CreateBase", b1 =>
                         {
                             b1.IsRequired();
 
-                            b1.Property<DateTime?>("CreateDate")
-                                .HasColumnType("datetime2");
+                            b1.Property<DateTime>("CreateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("CreatedBy")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<DateTime>("UpdateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("UpdateBy")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<DateTime?>("UpdateDate")
-                                .HasColumnType("datetime2");
+                                .IsRequired()
+                                .HasColumnType("text");
                         });
 
                     b.HasKey("FinanceCategoryId");
@@ -226,81 +258,79 @@ namespace EazyPlanner.Infrastructure.Migrations
 
             modelBuilder.Entity("EazyPlanner.Domain.Entities.FinancialRecord", b =>
                 {
-                    b.Property<int>("FinancialRecordId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FinancialRecordId"));
+                    b.Property<int?>("FinanceCategoryId")
+                        .HasColumnType("integer");
 
                     b.Property<decimal?>("ActualAmount")
                         .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
+                        .HasColumnType("money");
 
                     b.Property<int?>("BankrollAccountId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int?>("CosteCenterId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int?>("CustomerSupplierId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<DateTime>("DueDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
-                    b.Property<int?>("FinanceCategoryId")
-                        .HasColumnType("int");
+                    b.Property<int>("FinancialRecordId")
+                        .HasColumnType("integer");
 
                     b.Property<int?>("InvoiceId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int?>("PaymentMethodId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<decimal>("PlannedAmount")
                         .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
+                        .HasColumnType("money");
 
                     b.Property<DateTime?>("ReceivedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("RecordType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.ComplexProperty<Dictionary<string, object>>("Create", "EazyPlanner.Domain.Entities.FinancialRecord.Create#CreateBase", b1 =>
                         {
                             b1.IsRequired();
 
-                            b1.Property<DateTime?>("CreateDate")
-                                .HasColumnType("datetime2");
+                            b1.Property<DateTime>("CreateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("CreatedBy")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<DateTime>("UpdateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("UpdateBy")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<DateTime?>("UpdateDate")
-                                .HasColumnType("datetime2");
+                                .IsRequired()
+                                .HasColumnType("text");
                         });
 
-                    b.HasKey("FinancialRecordId");
+                    b.HasKey("FinanceCategoryId");
 
                     b.HasIndex("BankrollAccountId");
 
                     b.HasIndex("CosteCenterId");
 
                     b.HasIndex("CustomerSupplierId");
-
-                    b.HasIndex("FinanceCategoryId");
 
                     b.HasIndex("InvoiceId");
 
@@ -313,44 +343,48 @@ namespace EazyPlanner.Infrastructure.Migrations
                 {
                     b.Property<int>("InvoiceId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("InvoiceId"));
 
                     b.Property<decimal>("Amount")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
+                        .HasPrecision(18, 2)
+                        .HasColumnType("money");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("File")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Number")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.ComplexProperty<Dictionary<string, object>>("Create", "EazyPlanner.Domain.Entities.Invoice.Create#CreateBase", b1 =>
                         {
                             b1.IsRequired();
 
-                            b1.Property<DateTime?>("CreateDate")
-                                .HasColumnType("datetime2");
+                            b1.Property<DateTime>("CreateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("CreatedBy")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<DateTime>("UpdateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("UpdateBy")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<DateTime?>("UpdateDate")
-                                .HasColumnType("datetime2");
+                                .IsRequired()
+                                .HasColumnType("text");
                         });
 
                     b.HasKey("InvoiceId");
@@ -362,29 +396,32 @@ namespace EazyPlanner.Infrastructure.Migrations
                 {
                     b.Property<int>("PaymentMethodId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentMethodId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PaymentMethodId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.ComplexProperty<Dictionary<string, object>>("Create", "EazyPlanner.Domain.Entities.PaymentMethod.Create#CreateBase", b1 =>
                         {
                             b1.IsRequired();
 
-                            b1.Property<DateTime?>("CreateDate")
-                                .HasColumnType("datetime2");
+                            b1.Property<DateTime>("CreateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("CreatedBy")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<DateTime>("UpdateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("UpdateBy")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<DateTime?>("UpdateDate")
-                                .HasColumnType("datetime2");
+                                .IsRequired()
+                                .HasColumnType("text");
                         });
 
                     b.HasKey("PaymentMethodId");
@@ -396,38 +433,41 @@ namespace EazyPlanner.Infrastructure.Migrations
                 {
                     b.Property<int>("PeopleId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PeopleId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PeopleId"));
 
                     b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<int?>("CustomerSupplierId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Genre")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.ComplexProperty<Dictionary<string, object>>("Create", "EazyPlanner.Domain.Entities.People.Create#CreateBase", b1 =>
                         {
                             b1.IsRequired();
 
-                            b1.Property<DateTime?>("CreateDate")
-                                .HasColumnType("datetime2");
+                            b1.Property<DateTime>("CreateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("CreatedBy")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<DateTime>("UpdateAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<string>("UpdateBy")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<DateTime?>("UpdateDate")
-                                .HasColumnType("datetime2");
+                                .IsRequired()
+                                .HasColumnType("text");
                         });
 
                     b.HasKey("PeopleId");
@@ -453,7 +493,9 @@ namespace EazyPlanner.Infrastructure.Migrations
 
                     b.HasOne("EazyPlanner.Domain.Entities.FinanceCategory", "FinanceCategory")
                         .WithMany("FinancialRecords")
-                        .HasForeignKey("FinanceCategoryId");
+                        .HasForeignKey("FinanceCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("EazyPlanner.Domain.Entities.Invoice", "Invoice")
                         .WithMany("FinancialRecords")

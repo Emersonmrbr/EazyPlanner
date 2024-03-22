@@ -7,7 +7,7 @@ namespace EazyPlanner.Domain.Entities
     {
         public int CostCenterId { get; private set; } = costCenterId;
         public required string Name { get; set; } = name;
-        public CreateBase? Create { get; set; }
+        public CreateBase Create { get; set; } = new CreateBase(string.Empty, DateTime.Now, string.Empty, DateTime.Now);
 
         public ICollection<FinancialRecord>? FinancialRecords { get; private set; } = new List<FinancialRecord>();
     }

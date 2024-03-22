@@ -1,6 +1,9 @@
 ﻿using EazyPlanner.Domain.Abstractions;
+using EazyPlanner.Domain.Entities;
 using EazyPlanner.Infrastructure.Context;
+using EazyPlanner.Infrastructure.EntityValidation;
 using EazyPlanner.Infrastructure.Repositories;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,10 +17,10 @@ namespace EazyPlanner.CrossCutting.DependenciesApp
      IConfiguration configuration)
         {
             var connectionString = configuration
-                                  .GetConnectionString("SqlServerString") ?? throw new InvalidOperationException("Connection string 'SqlServerString' not found.");
+                                  .GetConnectionString("PostgresString") ?? throw new InvalidOperationException("Connection string 'PostgresString' not found.");
 
             //services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
 
             services.AddScoped<IBankrollAccountRepository, BankrollAccountRepository>();
             services.AddScoped<IcostCenterRepository, CostCenterRepository>();
@@ -27,6 +30,9 @@ namespace EazyPlanner.CrossCutting.DependenciesApp
             services.AddScoped<IInvoiceRepository, InvoiceRepository>();
             services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
             services.AddScoped<IPeopleRepository, PeopleRepository>();
+            services.AddValidatorsFromAssemblyContaining<BankrollAccountValidation>();
+            services.AddValidatorsFromAssemblyContaining<CostCenter>();
+            services.AddValidatorsFromAssemblyContaining<CustomerSupplier>();
             //services.AddScoped<ILivroService, LivroService>();
 
             return services;
