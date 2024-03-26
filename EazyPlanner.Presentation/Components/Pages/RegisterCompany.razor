@@ -1,6 +1,5 @@
 ﻿@page "/registercompany"
-@using EazyPlanner.Domain.Entities
-@inject ILogger<CustomerSupplier> Logger
+
 <h3>Register Company</h3>
 
 @if (customerSupplier is null)
@@ -11,6 +10,7 @@ else
 {
     <EditForm Enhance="true" method="post" Model="@customerSupplier" OnValidSubmit="@HandlerSubmit" FormName="customerSupplier" class="form-floating">
         <DataAnnotationsValidator />
+        <Morris.Blazor.Validation.Validate />
         <div class="row g-2 mb-3">
             <div class="col-md-2">
                 <div class="form-floating">
@@ -121,7 +121,7 @@ else
         Logger.LogInformation("CNPJ {cnpj}", customerSupplier?.CNPJ);
         // var newCustomerSupplier = (CustomerSupplier)editContext.Model;
         // newCustomerSupplier.CNPJ = customerSupplier.CNPJ;
-        customerSupplier!.Create!.CreateAt = DateTime.Now;
+        customerSupplier!.Create!.CreateAt = DateTime.UtcNow;
         customerSupplier.Create.CreatedBy = "Emerson Martins Brito";
         await customerSupplierRepository.AddCustomerSupplier(customerSupplier!);
         navigation.NavigateTo("/");
@@ -131,7 +131,7 @@ else
     {
         customerSupplier ??= new CustomerSupplier(0, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
         customerSupplier.Address ??= new AddressBase(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
-        customerSupplier.Create ??= new CreateBase(string.Empty, DateTime.Now, string.Empty, DateTime.Now);
+        customerSupplier.Create ??= new CreateBase(string.Empty, DateTime.UtcNow, string.Empty, DateTime.UtcNow);
         customerSupplier.Contact ??= new ContactBase(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
     }
 }

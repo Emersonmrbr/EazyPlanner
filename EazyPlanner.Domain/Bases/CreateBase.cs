@@ -1,4 +1,6 @@
-﻿namespace EazyPlanner.Domain.Base
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EazyPlanner.Domain.Base
 {
     public class CreateBase
     {
@@ -13,7 +15,9 @@
             UpdateAt = updateAt;
         }
         public string CreatedBy { get; set; } = string.Empty;
+        [DataType(DataType.DateTime)]
         public DateTime CreateAt { get; set; } = new();
+        [DataType(DataType.DateTime)]
         public string UpdateBy { get; set; } = string.Empty;
         public DateTime UpdateAt { get; set; } = new();
     }
