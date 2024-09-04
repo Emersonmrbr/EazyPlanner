@@ -1,4 +1,6 @@
 ﻿@page "/registercompany"
+@rendermode InteractiveServer
+
 
 <h3>Register Company</h3>
 
@@ -113,18 +115,19 @@ else
 }
 @code {
     [SupplyParameterFromForm(FormName = "customerSupplier")]
-    public CustomerSupplier? customerSupplier { get; set; }
+    private CustomerSupplier? customerSupplier { get; set; }
+    private IEnumerable<CustomerSupplier>? customerSuppliers { get; set; }
 
 
     private async void HandlerSubmit(EditContext editContext)
     {
         Logger.LogInformation("CNPJ {cnpj}", customerSupplier?.CNPJ);
         // var newCustomerSupplier = (CustomerSupplier)editContext.Model;
-        // newCustomerSupplier.CNPJ = customerSupplier.CNPJ;
+        // newCustomerSupplier.CNPJ = customerSupplier!.CNPJ;
         customerSupplier!.Create!.CreateAt = DateTime.UtcNow;
         customerSupplier.Create.CreatedBy = "Emerson Martins Brito";
         await customerSupplierRepository.AddCustomerSupplier(customerSupplier!);
-        navigation.NavigateTo("/");
+        navigation.NavigateTo("/registercompany");
     }
 
     protected override void OnInitialized()
