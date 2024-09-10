@@ -7,6 +7,7 @@ namespace EazyPlanner.Infrastructure.Repositories
 {
     public class CustomerSupplierRepository : ICustomerSupplierRepository
     {
+       
         private ApplicationDbContext _context;
         public CustomerSupplierRepository(ApplicationDbContext context)
         {
@@ -17,9 +18,16 @@ namespace EazyPlanner.Infrastructure.Repositories
         {
             if (_context is not null && customerSupplier is not null && _context.CustomerSupplier is not null)
             {
-                _context.CustomerSupplier.Add(customerSupplier);
-                await _context.SaveChangesAsync();
-                return customerSupplier;
+                if (await CnpjExists(customerSupplier.CNPJ) == false)
+                {
+                    _context.CustomerSupplier.Add(customerSupplier);
+                    await _context.SaveChangesAsync();
+                    return customerSupplier;
+                }
+                else
+                {
+                    throw new InvalidOperationException("CNPJ já cadastrado");
+                }
             }
             else
             {
@@ -29,7 +37,7 @@ namespace EazyPlanner.Infrastructure.Repositories
 
         public async Task DeleteCustomerSupplier(int id)
         {
-            var customerSupplier = await GetCustomerSupplier(id);
+            var customerSupplier = await GetCustomerSupplierById(id);
             if (customerSupplier is not null)
             {
                 _context.CustomerSupplier.Remove(customerSupplier);
@@ -41,16 +49,22 @@ namespace EazyPlanner.Infrastructure.Repositories
             }
         }
 
-        public async Task<CustomerSupplier?> GetCustomerSupplier(int id)
+        public async Task<CustomerSupplier?> GetCustomerSupplierById(int id)
         {
 
             var customerSupplier = await _context.CustomerSupplier.FirstOrDefaultAsync(c => c.CustomerSupplierId == id);
             if (customerSupplier is null)
             {
-                throw new InvalidOperationException($"Customer supplier com id{id} não encontrado");
+                throw new InvalidOperationException($"Customer supplier com id{id} não encontrado.");
             }
             return customerSupplier;
         }
+
+        public async Task<bool> CnpjExists(string cnpj)
+        {                   
+            return await _context.CustomerSupplier.AnyAsync(c => c.CNPJ == cnpj);
+        }
+        
 
         public async Task<IEnumerable<CustomerSupplier>> GetCustomersSuppliers()
         {

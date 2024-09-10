@@ -126,9 +126,10 @@ else
         // newCustomerSupplier.CNPJ = customerSupplier!.CNPJ;
         customerSupplier!.Create!.CreateAt = DateTime.UtcNow;
         customerSupplier.Create.CreatedBy = "Emerson Martins Brito";
+         
         await customerSupplierRepository.AddCustomerSupplier(customerSupplier!);
-        navigation.NavigateTo("/registercompany");
-    }
+        navigation.NavigateTo("/registercompany"); }
+    
 
     protected override void OnInitialized()
     {
