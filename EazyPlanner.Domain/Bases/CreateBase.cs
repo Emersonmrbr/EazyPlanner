@@ -2,24 +2,12 @@
 
 namespace EazyPlanner.Domain.Base
 {
-    public class CreateBase
+    public class CreateBase(string createdBy, DateTime createAt, string updateBy, DateTime updateAt)
     {
-        public CreateBase(string createdBy,
-                                DateTime createAt,
-                                string updateBy,
-                                DateTime updateAt)
-        {
-            CreatedBy = createdBy;
-            CreateAt = createAt;
-            UpdateBy = updateBy;
-            UpdateAt = updateAt;
-        }
-        public string CreatedBy { get; set; } = string.Empty;
-        [DataType(DataType.DateTime)]
-        public DateTime CreateAt { get; set; } = new();
-        [DataType(DataType.DateTime)]
-        public string UpdateBy { get; set; } = string.Empty;
-        public DateTime UpdateAt { get; set; } = new();
+        public string CreatedBy { get; set; } = createdBy;
+        public DateTime CreateAt { get; set; } = createAt;
+        public string UpdateBy { get; set; } = updateBy;
+        public DateTime UpdateAt { get; set; } = updateAt;
     }
 }
 

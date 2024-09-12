@@ -44,7 +44,7 @@ namespace EazyPlanner.Infrastructure.Repositories
 
         public async Task<FinanceCategory?> GetFinanceCategory(int id)
         {
-            var financeCategory = await _context.FinanceCategory.FirstOrDefaultAsync(c => c.FinanceCategoryId == id);
+            var financeCategory = await _context.FinanceCategory.FirstOrDefaultAsync(c => c.Id == id);
             if (financeCategory is null)
             {
                 throw new InvalidOperationException($"Finance category method with id{id} not found");

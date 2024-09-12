@@ -8,13 +8,19 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Invoice> builder)
         {
-            builder.HasKey(pk => pk.InvoiceId);
+            builder.HasKey(pk => pk.Id);
             builder.Property(p => p.Name).HasMaxLength(100).IsRequired();
             builder.Property(p => p.Number).HasMaxLength(100).IsRequired();
-            builder.Property(p => p.Amount).HasColumnType("money").HasPrecision(18, 2).IsRequired();
-            builder.Property(p => p.Date).HasColumnType("date").IsRequired();
+            builder.Property(p => p.Amount)
+                .HasColumnType("money")
+                .HasPrecision(18, 2)
+                .IsRequired();
+            builder.Property(p => p.Date)
+                .HasColumnType("date")
+                .IsRequired();
 
-            builder.ComplexProperty(c => c.Create).IsRequired();
+            builder.ComplexProperty(c => c.Create)
+                .IsRequired();
         }
     }
 }

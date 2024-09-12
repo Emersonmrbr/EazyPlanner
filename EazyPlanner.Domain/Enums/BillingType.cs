@@ -1,5 +1,4 @@
-﻿
-namespace EazyPlanner.Domain.Enums
+﻿namespace EazyPlanner.Domain.Enums
 {
     public enum BillingType
     {

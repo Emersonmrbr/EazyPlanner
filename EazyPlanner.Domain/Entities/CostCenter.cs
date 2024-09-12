@@ -2,13 +2,12 @@
 
 namespace EazyPlanner.Domain.Entities
 {
-    public class CostCenter(int costCenterId,
-                      string name)
+    public class CostCenter(int id, string name, CreateBase? create, ICollection<FinancialRecord>? financialRecords)
     {
-        public int CostCenterId { get; private set; } = costCenterId;
+        public int Id { get; private set; } = id;
         public required string Name { get; set; } = name;
-        public CreateBase Create { get; set; } = new CreateBase(string.Empty, DateTime.Now, string.Empty, DateTime.Now);
+        public CreateBase? Create { get; set; } = create;
 
-        public ICollection<FinancialRecord>? FinancialRecords { get; private set; } = [];
+        public ICollection<FinancialRecord>? FinancialRecords { get; private set; } = financialRecords;
     }
 }

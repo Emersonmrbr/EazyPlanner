@@ -3,33 +3,35 @@ using EazyPlanner.Domain.Enums;
 
 namespace EazyPlanner.Domain.Entities
 {
-    public class Project
+    public class Project(int id, string name, string number, string? description, BillingMethod billingMethod, BillingPriority? billingPriority, decimal? estimatedPrice, decimal? unbilledAr, double? budgetHours, double? hoursWorkedSeconds, double? progress, HoursEstimate? hoursEstimate, string? hoursBooked, string? hoursWorked, string? state, CreateBase? create, int? customerSupplierId, CustomerSupplier? customerSupplier, ICollection<People>? involvedEmployes, ICollection<People>? involvedGuests, ICollection<People>? managers, ICollection<People>? members, ICollection<ProjectTask>? tasks)
     {
-        public BillingType TaskBillingType { get; set; }
-        public bool TaskCompleted { get; set; }
-        public CreateBase ProjectCreate { get; set; }
-        public CustomerSupplier? CustomerSupplier { get; set; }
-        public decimal EstimatedPrice { get; set; }
-        public decimal TaskEstimateBillableAmount { get; set; }
-        public decimal TaskEstimateCost { get; set; }
-        public decimal UnbilledAr { get; set; }
-        public double HoursWorkedSeconds { get; set; }
-        public double ProjectProgress { get; set; }
-        public double TaskHoursLeft { get; set; }
-        public double TaskHoursWorked { get; set; }
-        public double TaskWorkedTotal { get; set; }
-        public ICollection<People> ProjectInvolvedEmployes { get; private set; }
-        public ICollection<People> ProjectInvolvedGuests { get; private set; }
-        public ICollection<People> ProjectManagers { get; private set; }
-        public ICollection<People> ProjectMembers { get; private set; }
-        public int ProjectId { get; private set; }
-        public int? CustomerSupplierId { get; set; }
-        public required string ProjectName { get; set; }
-        public string ProjectBudgetHours { get; set; }
-        public string ProjectDescription { get; set; }
-        public string ProjectHoursBooked { get; set; }
-        public string ProjectHoursWorked { get; set; }
-        public string ProjectState { get; set; }
+        public int Id { get; private set; } = id;
+        public required string Name { get; set; } = name;
+        public required string Number { get; set; } = number;
+        public string? Description { get; set; } = description;
+
+        public required BillingMethod BillingMethod { get; set; } = billingMethod;
+        public BillingPriority? BillingPriority { get; set; } = billingPriority;
+        public decimal? EstimatedPrice { get; set; } = estimatedPrice;
+        public decimal? UnbilledAr { get; set; } = unbilledAr;
+        public double? BudgetHours { get; set; } = budgetHours;
+        public double? HoursWorkedSeconds { get; set; } = hoursWorkedSeconds;
+        public double? Progress { get; set; } = progress;
+        public HoursEstimate? HoursEstimate { get; set; } = hoursEstimate;
+        public string? HoursBooked { get; set; } = hoursBooked;
+        public string? HoursWorked { get; set; } = hoursWorked;
+        public string? State { get; set; } = state;
+
+        public CreateBase? Create { get; set; } = create;
+
+        public int? CustomerSupplierId { get; private set; } = customerSupplierId;
+        public CustomerSupplier? CustomerSupplier { get; private set; } = customerSupplier;
+
+        public ICollection<People>? InvolvedEmployes { get; private set; } = involvedEmployes;
+        public ICollection<People>? InvolvedGuests { get; private set; } = involvedGuests;
+        public ICollection<People>? Managers { get; private set; } = managers;
+        public ICollection<People>? Members { get; private set; } = members;
+        public ICollection<ProjectTask>? Tasks { get; private set; } = tasks;
 
     }
 }

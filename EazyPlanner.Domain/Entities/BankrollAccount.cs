@@ -2,16 +2,12 @@
 
 namespace EazyPlanner.Domain.Entities
 {
-
-
-    public class BankrollAccount(
-        int bankrollAccountId,
-        string name)
+    public class BankrollAccount(int id, string name, CreateBase? create, ICollection<FinancialRecord>? financialRecords)
     {
-        public int BankrollAccountId { get; private set; } = bankrollAccountId;
+        public int Id { get; private set; } = id;
         public required string Name { get; set; } = name;
-        public CreateBase Create { get; set; } = new CreateBase(string.Empty, DateTime.Now, string.Empty, DateTime.Now);
+        public CreateBase? Create { get; set; } = create;
 
-        public ICollection<FinancialRecord>? FinancialRecords { get; private set; } = [];
+        public ICollection<FinancialRecord>? FinancialRecords { get; private set; } = financialRecords;
     }
 }

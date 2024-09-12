@@ -43,7 +43,7 @@ namespace EazyPlanner.Infrastructure.Repositories
 
         public async Task<People?> GetPeople(int id)
         {
-            var people = await _context.People.FirstOrDefaultAsync(c => c.PeopleId == id);
+            var people = await _context.People.FirstOrDefaultAsync(c => c.Id == id);
             if (people is null)
             {
                 throw new InvalidOperationException($"People method with id{id} not found");

@@ -8,7 +8,7 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<CustomerSupplier> builder)
         {
-            builder.HasKey(pk => pk.CustomerSupplierId);
+            builder.HasKey(pk => pk.Id);
             builder.Property(p => p.CNPJ).HasMaxLength(50).IsRequired();
             builder.Property(p => p.CompanyName).HasMaxLength(100).IsRequired();
             builder.Property(p => p.CompanyFantasy).HasMaxLength(100);

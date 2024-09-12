@@ -9,11 +9,17 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
         public void Configure(EntityTypeBuilder<FinancialRecord> builder)
         {
             builder.HasKey(pk => pk.FinanceCategoryId);
-            builder.Property(p => p.Description).HasMaxLength(100).IsRequired();
-            builder.Property(p => p.DueDate).HasColumnType("date");
-            builder.Property(p => p.PlannedAmount).HasColumnType("money").HasPrecision(18, 2);
+            builder.Property(p => p.Description)
+                .HasMaxLength(100)
+                .IsRequired();
+            builder.Property(p => p.PlannedDate).HasColumnType("date");
+            builder.Property(p => p.PlannedAmount)
+                .HasColumnType("money")
+                .HasPrecision(18, 2);
             builder.Property(p => p.ReceivedDate).HasColumnType("date");
-            builder.Property(p => p.ActualAmount).HasColumnType("money").HasPrecision(18, 2);
+            builder.Property(p => p.ReceivedAmount)
+                .HasColumnType("money")
+                .HasPrecision(18, 2);
 
             builder.ComplexProperty(c => c.Create).IsRequired();
 
@@ -43,8 +49,11 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
                 .WithMany(m => m.FinancialRecords)
                 .HasForeignKey(fk => fk.PaymentMethodId);
 
-            builder.Property(p => p.PlannedAmount).IsRequired().HasPrecision(10, 2);
-            builder.Property(p => p.ActualAmount).HasPrecision(10, 2);
+            builder.Property(p => p.PlannedAmount)
+                .IsRequired()
+                .HasPrecision(10, 2);
+            builder.Property(p => p.ReceivedAmount)
+                .HasPrecision(10, 2);
 
         }
     }

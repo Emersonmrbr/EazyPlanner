@@ -8,11 +8,16 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<People> builder)
         {
-            builder.HasKey(pk => pk.PeopleId);
-            builder.Property(p => p.Name).HasMaxLength(100).IsRequired();
-            builder.Property(p => p.BirthDate).HasColumnType("date").IsRequired();
+            builder.HasKey(pk => pk.Id);
+            builder.Property(p => p.Name)
+                .HasMaxLength(100)
+                .IsRequired();
+            builder.Property(p => p.BirthDate)
+                .HasColumnType("date")
+                .IsRequired();
 
-            builder.ComplexProperty(c => c.Create).IsRequired();
+            builder.ComplexProperty(c => c.Create)
+                .IsRequired();
         }
     }
 }

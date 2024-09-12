@@ -52,7 +52,7 @@ namespace EazyPlanner.Infrastructure.Repositories
         public async Task<CustomerSupplier?> GetCustomerSupplierById(int id)
         {
 
-            var customerSupplier = await _context.CustomerSupplier.FirstOrDefaultAsync(c => c.CustomerSupplierId == id);
+            var customerSupplier = await _context.CustomerSupplier.FirstOrDefaultAsync(c => c.Id == id);
             if (customerSupplier is null)
             {
                 throw new InvalidOperationException($"Customer supplier com id{id} não encontrado.");

@@ -3,18 +3,15 @@
 namespace EazyPlanner.Domain.Entities
 {
 
-    public class People(int peopleId,
-                  string name,
-                  DateTime birthDate,
-                  string genre)
+    public class People(int id, string name, DateTime? birthDate, string? genre, CreateBase? create, int? customerSupplierId, CustomerSupplier? customerSupplier)
     {
-        public int PeopleId { get; private set; } = peopleId;
+        public int Id { get; private set; } = id;
         public required string Name { get; set; } = name;
-        public DateTime BirthDate { get; set; } = birthDate;
-        public string Genre { get; set; } = genre;
-        public CreateBase Create { get; set; } = new CreateBase(string.Empty, DateTime.Now, string.Empty, DateTime.Now);
+        public DateTime? BirthDate { get; set; } = birthDate;
+        public string? Genre { get; set; } = genre;
+        public CreateBase? Create { get; set; } = create;
 
-        public int? CustomerSupplierId { get; set; }
-        public CustomerSupplier? CustomerSupplier { get; set; }
+        public int? CustomerSupplierId { get; private set; } = customerSupplierId;
+        public CustomerSupplier? CustomerSupplier { get; private set; } = customerSupplier;
     }
 }

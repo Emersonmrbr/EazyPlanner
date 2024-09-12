@@ -44,7 +44,7 @@ namespace EazyPlanner.Infrastructure.Repositories
 
         public async Task<Invoice?> GetInvoice(int id)
         {
-            var invoice = await _context.Invoice.FirstOrDefaultAsync(c => c.InvoiceId == id);
+            var invoice = await _context.Invoice.FirstOrDefaultAsync(c => c.Id == id);
             if (invoice is null)
             {
                 throw new InvalidOperationException($"Invoice with id{id} not found");

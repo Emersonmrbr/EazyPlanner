@@ -45,7 +45,7 @@ namespace EazyPlanner.Infrastructure.Repositories
         public async Task<BankrollAccount?> GetBankrollAccount(int id)
         {
 
-            var bankrollAccount = await _context.BankrollAccount.FirstOrDefaultAsync(c => c.BankrollAccountId == id);
+            var bankrollAccount = await _context.BankrollAccount.FirstOrDefaultAsync(c => c.Id == id);
             if (bankrollAccount is null)
             {
                 throw new InvalidOperationException($"Bankroll account com id{id} não encontrado");

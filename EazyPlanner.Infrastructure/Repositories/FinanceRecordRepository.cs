@@ -45,7 +45,7 @@ namespace EazyPlanner.Infrastructure.Repositories
 
         public async Task<FinancialRecord?> GetFinancialRecord(int id)
         {
-            var financialRecord = await _context.FinancialRecord.FirstOrDefaultAsync(c => c.FinancialRecordId == id);
+            var financialRecord = await _context.FinancialRecord.FirstOrDefaultAsync(c => c.Id == id);
             if (financialRecord is null)
             {
                 throw new InvalidOperationException($"Financial record method with id{id} not found");

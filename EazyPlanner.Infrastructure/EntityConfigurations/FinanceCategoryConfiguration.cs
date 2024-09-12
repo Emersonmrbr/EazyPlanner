@@ -8,7 +8,7 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<FinanceCategory> builder)
         {
-            builder.HasKey(pk => pk.FinanceCategoryId);
+            builder.HasKey(pk => pk.Id);
             builder.Property(p => p.Name).HasMaxLength(100).IsRequired();
 
             builder.ComplexProperty(c => c.Create).IsRequired();

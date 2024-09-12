@@ -44,7 +44,7 @@ namespace EazyPlanner.Infrastructure.Repositories
 
         public async Task<PaymentMethod?> GetPaymentMethod(int id)
         {
-            var paymentMethod = await _context.PaymentMethod.FirstOrDefaultAsync(c => c.PaymentMethodId == id);
+            var paymentMethod = await _context.PaymentMethod.FirstOrDefaultAsync(c => c.Id == id);
             if (paymentMethod is null)
             {
                 throw new InvalidOperationException($"Payment method with id{id} not found");
