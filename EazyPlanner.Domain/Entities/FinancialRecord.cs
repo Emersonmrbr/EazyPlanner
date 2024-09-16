@@ -6,12 +6,12 @@ namespace EazyPlanner.Domain.Entities
     public class FinancialRecord(int id, string description, DateTime plannedDate, decimal plannedAmount, DateTime? receivedDate, decimal? receivedAmount, string recordType, string? status, CreateBase? create, int? bankrollAccountId, BankrollAccount? bankrollAccount, int? costeCenterId, CostCenter? costCenter, int? customerSupplierId, CustomerSupplier? customerSupplier, int? financeCategoryId, FinanceCategory? financeCategory, int? invoiceId, Invoice? invoice, int? paymentMethodId, PaymentMethod? paymentMethod)
     {
         public int Id { get; private set; } = id;
-        public required string Description { get; set; } = description;
-        public required DateTime PlannedDate { get; set; } = plannedDate;
-        public required decimal PlannedAmount { get; set; } = plannedAmount;
+        public string Description { get; set; } = description;
+        public DateTime PlannedDate { get; set; } = plannedDate;
+        public decimal PlannedAmount { get; set; } = plannedAmount;
         public DateTime? ReceivedDate { get; set; } = receivedDate;
         public decimal? ReceivedAmount { get; set; } = receivedAmount;
-        public required string RecordType { get; set; } = recordType;
+        public string RecordType { get; set; } = recordType;
         public string? Status { get; set; } = status;
         public CreateBase? Create { get; set; } = create;
 

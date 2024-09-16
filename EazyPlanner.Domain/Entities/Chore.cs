@@ -3,14 +3,14 @@ using EazyPlanner.Domain.Enums;
 
 namespace EazyPlanner.Domain.Entities
 {
-    public class ProjectTask(int id, string name, string number, string? description, BillingType billingType, bool completed, bool invoced, DateTime? dueDate, DateTime? endDate, DateTime? startDate, decimal? estimateBillableAmount, decimal? estimateCost, decimal? hourlyRate, double? estimateHours, double? hoursLeft, double? hoursWorked, double? progressStatus, double? workedFromTotal, string? priority, CreateBase? create, int? projectId, Project? project, ICollection<People>? assignedTo, ICollection<People>? followers, ICollection<TimeEntrie>? timeEntries, ICollection<string>? taskList)
+    public class Chore(int id, string name, string number, string? description, BillingType billingType, bool completed, bool invoced, DateTime? dueDate, DateTime? endDate, DateTime? startDate, decimal? estimateBillableAmount, decimal? estimateCost, decimal? hourlyRate, double? estimateHours, double? hoursLeft, double? hoursWorked, double? progressStatus, double? workedFromTotal, string? priority, CreateBase? create, int? projectId, Project? project, ICollection<People>? assignedTo, ICollection<People>? followers, ICollection<TimeEntrie>? timeEntries, ICollection<string>? choreList)
     {
         public int Id { get; set; } = id;
-        public required string Name { get; set; } = name;
-        public required string Number { get; set; } = number;
+        public string Name { get; set; } = name;
+        public string Number { get; set; } = number;
         public string? Description { get; set; } = description;
 
-        public required BillingType BillingType { get; set; } = billingType;
+        public BillingType BillingType { get; set; } = billingType;
         public bool Completed { get; set; } = completed;
         public bool Invoced { get; set; } = invoced;
         public DateTime? DueDate { get; set; } = dueDate;
@@ -26,12 +26,13 @@ namespace EazyPlanner.Domain.Entities
         public double? WorkedFromTotal { get; set; } = workedFromTotal;
         public string? Priority { get; set; } = priority;
         public CreateBase? Create { get; set; } = create;
+
         public int? ProjectId { get; private set; } = projectId;
         public Project? Project { get; private set; } = project;
 
         public ICollection<People>? AssignedTo { get; set; } = assignedTo;
         public ICollection<People>? Followers { get; set; } = followers;
         public ICollection<TimeEntrie>? TimeEntries { get; set; } = timeEntries;
-        public ICollection<string>? TaskList { get; set; } = taskList;
+        public ICollection<string>? ChoreList { get; set; } = choreList;
     }
 }

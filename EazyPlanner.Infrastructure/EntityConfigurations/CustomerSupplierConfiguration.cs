@@ -19,8 +19,17 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
             builder.ComplexProperty(c => c.Create).IsRequired();
             builder.ComplexProperty(c => c.Contact).IsRequired();
 
+            //Realtionship one-to-many
             builder
                 .HasMany(m => m.Peoples)
+                .WithOne(o => o.CustomerSupplier)
+                .HasForeignKey(fk => fk.CustomerSupplierId);
+            builder
+                .HasMany(m => m.FinancialRecords)
+                .WithOne(o => o.CustomerSupplier)
+                .HasForeignKey(fk => fk.CustomerSupplierId);
+            builder
+                .HasMany(m => m.Projects)
                 .WithOne(o => o.CustomerSupplier)
                 .HasForeignKey(fk => fk.CustomerSupplierId);
         }

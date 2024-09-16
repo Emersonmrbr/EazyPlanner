@@ -15,6 +15,9 @@ namespace EazyPlanner.Infrastructure.Context
         public DbSet<Invoice> Invoice { get; set; }
         public DbSet<PaymentMethod> PaymentMethod { get; set; }
         public DbSet<People> People { get; set; }
+        public DbSet<Project> Project { get; set; }
+        public DbSet<Chore> ProjectTask { get; set; }
+        public DbSet<TimeEntrie> TimeEntrie { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
