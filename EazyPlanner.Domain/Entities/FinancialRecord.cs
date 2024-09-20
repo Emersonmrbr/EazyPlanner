@@ -1,9 +1,9 @@
-﻿using EazyPlanner.Domain.Base;
+﻿using EazyPlanner.Domain.Bases;
 
 namespace EazyPlanner.Domain.Entities
 {
 
-    public class FinancialRecord(int id, string description, DateTime plannedDate, decimal plannedAmount, DateTime? receivedDate, decimal? receivedAmount, string recordType, string? status, CreateBase? create, int? bankrollAccountId, BankrollAccount? bankrollAccount, int? costeCenterId, CostCenter? costCenter, int? customerSupplierId, CustomerSupplier? customerSupplier, int? financeCategoryId, FinanceCategory? financeCategory, int? invoiceId, Invoice? invoice, int? paymentMethodId, PaymentMethod? paymentMethod)
+    public class FinancialRecord(int id, string description, DateTime plannedDate, decimal plannedAmount, DateTime? receivedDate, decimal? receivedAmount, string recordType, string? status)
     {
         public int Id { get; private set; } = id;
         public string Description { get; set; } = description;
@@ -13,19 +13,20 @@ namespace EazyPlanner.Domain.Entities
         public decimal? ReceivedAmount { get; set; } = receivedAmount;
         public string RecordType { get; set; } = recordType;
         public string? Status { get; set; } = status;
-        public CreateBase? Create { get; set; } = create;
 
-        public int? BankrollAccountId { get; private set; } = bankrollAccountId;
-        public BankrollAccount? BankrollAccount { get; private set; } = bankrollAccount;
-        public int? CosteCenterId { get; private set; } = costeCenterId;
-        public CostCenter? CostCenter { get; private set; } = costCenter;
-        public int? CustomerSupplierId { get; private set; } = customerSupplierId;
-        public CustomerSupplier? CustomerSupplier { get; private set; } = customerSupplier;
-        public int? FinanceCategoryId { get; private set; } = financeCategoryId;
-        public FinanceCategory? FinanceCategory { get; private set; } = financeCategory;
-        public int? InvoiceId { get; private set; } = invoiceId;
-        public Invoice? Invoice { get; private set; } = invoice;
-        public int? PaymentMethodId { get; private set; } = paymentMethodId;
-        public PaymentMethod? PaymentMethod { get; private set; } = paymentMethod;
+        public CreateBase? Create { get; set; } = new();
+
+        public int? BankrollAccountId { get; private set; } = 0;
+        public BankrollAccount? BankrollAccount { get; private set; } = new(0, string.Empty);
+        public int? CosteCenterId { get; private set; } = 0;
+        public CostCenter? CostCenter { get; private set; } = new(0,string.Empty);
+        public int? CustomerSupplierId { get; private set; } = 0;
+        public CustomerSupplier? CustomerSupplier { get; private set; } = new(0,string.Empty,string.Empty);
+        public int? FinanceCategoryId { get; private set; } = 0;
+        public FinanceCategory? FinanceCategory { get; private set; } = new(0,string.Empty);
+        public int? InvoiceId { get; private set; } = 0;
+        public Invoice? Invoice { get; private set; } = new(0,string.Empty,string.Empty,0,DateTime.UtcNow,string.Empty);
+        public int? PaymentMethodId { get; private set; } = 0;
+        public PaymentMethod? PaymentMethod { get; private set; } = new(0,string.Empty);
     }
 }

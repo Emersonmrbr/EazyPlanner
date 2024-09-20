@@ -3,10 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EazyPlanner.Infrastructure.Context
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
     {
-
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<BankrollAccount> BankrollAccount { get; set; }
         public DbSet<CostCenter> CostCenter { get; set; }
         public DbSet<CustomerSupplier> CustomerSupplier { get; set; }
@@ -16,7 +14,7 @@ namespace EazyPlanner.Infrastructure.Context
         public DbSet<PaymentMethod> PaymentMethod { get; set; }
         public DbSet<People> People { get; set; }
         public DbSet<Project> Project { get; set; }
-        public DbSet<Chore> ProjectTask { get; set; }
+        public DbSet<Chore> Chore { get; set; }
         public DbSet<TimeEntrie> TimeEntrie { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

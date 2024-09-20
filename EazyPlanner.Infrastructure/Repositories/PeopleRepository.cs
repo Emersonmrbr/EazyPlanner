@@ -5,13 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EazyPlanner.Infrastructure.Repositories
 {
-    public class PeopleRepository : IPeopleRepository
+    public class PeopleRepository(ApplicationDbContext context) : IPeopleRepository
     {
-        private ApplicationDbContext _context;
-        public PeopleRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private ApplicationDbContext _context = context;
 
         public async Task<People> AddPeople(People people)
         {
@@ -29,7 +25,7 @@ namespace EazyPlanner.Infrastructure.Repositories
 
         public async Task DeletePeople(int id)
         {
-            var people = await GetPeople(id);
+            var people = await GetPeopleById(id);
             if (people is not null)
             {
                 _context.People.Remove(people);
@@ -41,12 +37,12 @@ namespace EazyPlanner.Infrastructure.Repositories
             }
         }
 
-        public async Task<People?> GetPeople(int id)
+        public async Task<People?> GetPeopleById(int id)
         {
             var people = await _context.People.FirstOrDefaultAsync(c => c.Id == id);
             if (people is null)
             {
-                throw new InvalidOperationException($"People method with id{id} not found");
+                throw new InvalidOperationException($"People method with id{id} was not found.");
             }
             return people;
         }

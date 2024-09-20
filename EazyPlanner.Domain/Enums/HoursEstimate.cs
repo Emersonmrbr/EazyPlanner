@@ -2,7 +2,7 @@
 {
     public enum HoursEstimate
     {
-        AdjustedAutomatically,
-        BudgetHours
+        AdjustedAutomatically = 4010,
+        BudgetHours = 4020
     }
 }

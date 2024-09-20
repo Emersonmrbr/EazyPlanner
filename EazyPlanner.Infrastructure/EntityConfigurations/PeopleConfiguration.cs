@@ -12,7 +12,7 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
             builder.Property(p => p.Name)
                 .HasMaxLength(100)
                 .IsRequired();
-            builder.Property(p => p.BirthDate)
+            builder.Property(p => p.Birth)
                 .HasColumnType("date")
                 .IsRequired();
 

@@ -2,10 +2,9 @@
 {
     public enum BillingPriority
     {
-        UserHourlyRate,
-        TaskHourlyRate,
-        ProjectHourlyRate,
-        CompanyHourlyRate,
-
+        UserHourlyRate = 2010,
+        TaskHourlyRate = 2020,
+        ProjectHourlyRate = 2030,
+        CompanyHourlyRate = 2040,
     }
 }

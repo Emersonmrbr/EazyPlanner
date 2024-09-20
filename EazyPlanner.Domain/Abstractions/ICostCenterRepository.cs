@@ -5,7 +5,7 @@ namespace EazyPlanner.Domain.Abstractions
     public interface IcostCenterRepository
     {
         Task<IEnumerable<CostCenter>> GetCostCenters();
-        Task<CostCenter?> GetCostCenter(int id);
+        Task<CostCenter?> GetCostCenterById(int id);
         Task<CostCenter> AddCostCenter(CostCenter costCenter);
         Task UpdateCostCenter(CostCenter costCenter);
         Task DeleteCostCenter(int id);

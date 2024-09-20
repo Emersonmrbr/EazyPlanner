@@ -1,13 +1,13 @@
-﻿namespace EazyPlanner.Domain.Base
+﻿namespace EazyPlanner.Domain.Bases
 {
-    public class AddressBase(string streetName, string buildingNumber, string secondaryAddress, string zipCode, string city, string state, string country)
+    public class AddressBase()
     {
-        public string StreetName { get; set; } = streetName;
-        public string BuildingNumber { get; set; } = buildingNumber;
-        public string SecondaryAddress { get; set; } = secondaryAddress;
-        public string ZipCode { get; set; } = zipCode;
-        public string City { get; set; } = city;
-        public string State { get; set; } = state;
-        public string Country { get; set; } = country;
+        public string StreetName { get; set; } = string.Empty;
+        public string BuildingNumber { get; set; } = string.Empty;
+        public string SecondaryAddress { get; set; } = string.Empty;
+        public string ZipCode { get; set; } = string.Empty;
+        public string City { get; set; } = string.Empty;
+        public string State { get; set; } = string.Empty;
+        public string Country { get; set; } = string.Empty;
     }
 }

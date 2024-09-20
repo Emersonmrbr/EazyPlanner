@@ -5,15 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EazyPlanner.Infrastructure.Repositories
 {
-    public class FinanceRecordRepository : IFinanceRecordRepository
+    public class FinanceRecordRepository(ApplicationDbContext context) : IFinanceRecordRepository
     {
-        private ApplicationDbContext _context;
-
-        public FinanceRecordRepository(ApplicationDbContext context)
-        {
-            _context = context;
-
-        }
+        private ApplicationDbContext _context = context;
 
         public async Task<FinancialRecord> AddFinancialRecord(FinancialRecord financialRecord)
         {
@@ -31,7 +25,7 @@ namespace EazyPlanner.Infrastructure.Repositories
 
         public async Task DeleteFinancialRecord(int id)
         {
-            var financialRecord = await GetFinancialRecord(id);
+            var financialRecord = await GetFinancialRecordById(id);
             if (financialRecord is not null)
             {
                 _context.FinancialRecord.Remove(financialRecord);
@@ -43,12 +37,12 @@ namespace EazyPlanner.Infrastructure.Repositories
             }
         }
 
-        public async Task<FinancialRecord?> GetFinancialRecord(int id)
+        public async Task<FinancialRecord?> GetFinancialRecordById(int id)
         {
             var financialRecord = await _context.FinancialRecord.FirstOrDefaultAsync(c => c.Id == id);
             if (financialRecord is null)
             {
-                throw new InvalidOperationException($"Financial record method with id{id} not found");
+                throw new InvalidOperationException($"Financial record method with id{id} was not found.");
             }
             return financialRecord;
         }

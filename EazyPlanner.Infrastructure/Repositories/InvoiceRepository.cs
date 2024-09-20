@@ -5,14 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EazyPlanner.Infrastructure.Repositories
 {
-    public class InvoiceRepository : IInvoiceRepository
+    public class InvoiceRepository(ApplicationDbContext context) : IInvoiceRepository
     {
 
-        private ApplicationDbContext _context;
-        public InvoiceRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private ApplicationDbContext _context = context;
 
         public async Task<Invoice> AddInvoice(Invoice invoice)
         {
@@ -30,7 +26,7 @@ namespace EazyPlanner.Infrastructure.Repositories
 
         public async Task DeleteInvoice(int id)
         {
-            var invoice = await GetInvoice(id);
+            var invoice = await GetInvoiceById(id);
             if (invoice is not null)
             {
                 _context.Invoice.Remove(invoice);
@@ -42,12 +38,12 @@ namespace EazyPlanner.Infrastructure.Repositories
             }
         }
 
-        public async Task<Invoice?> GetInvoice(int id)
+        public async Task<Invoice?> GetInvoiceById(int id)
         {
             var invoice = await _context.Invoice.FirstOrDefaultAsync(c => c.Id == id);
             if (invoice is null)
             {
-                throw new InvalidOperationException($"Invoice with id{id} not found");
+                throw new InvalidOperationException($"Invoice with id{id} was not found.");
             }
             return invoice;
         }

@@ -1,23 +1,23 @@
-﻿using EazyPlanner.Domain.Base;
+﻿using EazyPlanner.Domain.Bases;
 
 namespace EazyPlanner.Domain.Entities
 {
-    public class CustomerSupplier(int id, string cNPJ, string companyName, string companyFantasy, string provinceId, string cityId, AddressBase? address, ContactBase? contact, CreateBase? create, ICollection<People> peoples, ICollection<FinancialRecord> financialRecords, ICollection<Project> projects)
+    public class CustomerSupplier(int id, string cNPJ, string companyName)
     {
         public int Id { get; private set; } = id;
         public string CNPJ { get; set; } = cNPJ;
         public string CompanyName { get; set; } = companyName;
-        public string? CompanyFantasy { get; set; } = companyFantasy;
-        public string? ProvinceId { get; set; } = provinceId;
-        public string? CityId { get; set; } = cityId;
+        public string? CompanyFantasy { get; set; } = string.Empty;
+        public string? ProvinceId { get; set; } = string.Empty;
+        public string? CityId { get; set; } = string.Empty;
 
-        public AddressBase? Address { get; set; } = address;
-        public ContactBase? Contact { get; set; } = contact;
-        public CreateBase? Create { get; set; } = create;
+        public AddressBase? Address { get; set; } = new();
+        public ContactBase? Contact { get; set; } = new();
+        public CreateBase? Create { get; set; } = new();
 
-        public ICollection<People>? Peoples { get; private set; } = peoples;
-        public ICollection<FinancialRecord>? FinancialRecords { get; private set; } = financialRecords;
-        public ICollection<Project>? Projects { get; private set; } = projects;
+        public ICollection<People>? Peoples { get; set; } = [];
+        public ICollection<FinancialRecord>? FinancialRecords { get; set; } = [];
+        public ICollection<Project>? Projects { get; set; } = [];
 
     }
 }

@@ -1,17 +1,18 @@
-﻿using EazyPlanner.Domain.Base;
+﻿using EazyPlanner.Domain.Bases;
 
 namespace EazyPlanner.Domain.Entities
 {
-    public class Invoice(int id, string name, string number, decimal amount, DateTime date, string file, CreateBase? create, ICollection<FinancialRecord>? financialRecords)
+    public class Invoice(int id, string name, string number, decimal amount, DateTime date, string file)
     {
         public int Id { get; private set; } = id;
         public string Name { get; set; } = name;
         public string Number { get; set; } = number;
         public decimal Amount { get; set; } = amount;
         public DateTime Date { get; set; } = date;
-        public string File { get; set; } = file;
-        public CreateBase? Create { get; set; } = create;
+        public string? File { get; set; } = file;
 
-        public ICollection<FinancialRecord>? FinancialRecords { get; set; } = financialRecords;
+        public CreateBase? Create { get; set; } = new();
+
+        public ICollection<FinancialRecord>? FinancialRecords { get; set; } = [];
     }
 }

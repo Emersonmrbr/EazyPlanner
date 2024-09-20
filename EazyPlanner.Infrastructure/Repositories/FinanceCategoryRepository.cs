@@ -5,14 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EazyPlanner.Infrastructure.Repositories
 {
-    public class FinanceCategoryRepository : IFinanceCategoryRepository
+    public class FinanceCategoryRepository(ApplicationDbContext context) : IFinanceCategoryRepository
     {
-        private ApplicationDbContext _context;
-
-        public FinanceCategoryRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private ApplicationDbContext _context = context;
 
         public async Task<FinanceCategory> AddFinanceCategory(FinanceCategory financeCategory)
         {
@@ -30,7 +25,7 @@ namespace EazyPlanner.Infrastructure.Repositories
 
         public async Task DeleteFinanceCategory(int id)
         {
-            var financeCategory = await GetFinanceCategory(id);
+            var financeCategory = await GetFinanceCategoryById(id);
             if (financeCategory is not null)
             {
                 _context.FinanceCategory.Remove(financeCategory);
@@ -42,12 +37,12 @@ namespace EazyPlanner.Infrastructure.Repositories
             }
         }
 
-        public async Task<FinanceCategory?> GetFinanceCategory(int id)
+        public async Task<FinanceCategory?> GetFinanceCategoryById(int id)
         {
             var financeCategory = await _context.FinanceCategory.FirstOrDefaultAsync(c => c.Id == id);
             if (financeCategory is null)
             {
-                throw new InvalidOperationException($"Finance category method with id{id} not found");
+                throw new InvalidOperationException($"Finance category method with id{id} was not found.");
             }
             return financeCategory;
         }

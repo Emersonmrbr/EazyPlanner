@@ -5,14 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EazyPlanner.Infrastructure.Repositories
 {
-    public class CostCenterRepository : IcostCenterRepository
+    public class CostCenterRepository(ApplicationDbContext context) : IcostCenterRepository
     {
-        private ApplicationDbContext _context;
-
-        public CostCenterRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private ApplicationDbContext _context = context;
 
         public async Task<CostCenter> AddCostCenter(CostCenter costCenter)
         {
@@ -47,7 +42,7 @@ namespace EazyPlanner.Infrastructure.Repositories
             var costCenter = await _context.CostCenter.FirstOrDefaultAsync(c => c.Id == id);
             if (costCenter is null)
             {
-                throw new InvalidOperationException($"Cost center com id{id} não encontrado");
+                throw new InvalidOperationException($"Cost center with id{id} was not found.");
             }
             return costCenter;
         }

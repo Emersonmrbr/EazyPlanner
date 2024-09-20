@@ -5,29 +5,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EazyPlanner.Infrastructure.Repositories
 {
-    public class CustomerSupplierRepository : ICustomerSupplierRepository
+    public class CustomerSupplierRepository(ApplicationDbContext context) : ICustomerSupplierRepository
     {
-       
-        private ApplicationDbContext _context;
-        public CustomerSupplierRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+
+        private ApplicationDbContext _context = context;
 
         public async Task<CustomerSupplier> AddCustomerSupplier(CustomerSupplier customerSupplier)
         {
             if (_context is not null && customerSupplier is not null && _context.CustomerSupplier is not null)
             {
-                if (await CnpjExists(customerSupplier.CNPJ) == false)
-                {
-                    _context.CustomerSupplier.Add(customerSupplier);
-                    await _context.SaveChangesAsync();
-                    return customerSupplier;
-                }
-                else
-                {
-                    throw new InvalidOperationException("CNPJ já cadastrado");
-                }
+
+                _context.CustomerSupplier.Add(customerSupplier);
+                await _context.SaveChangesAsync();
+                return customerSupplier;
+
             }
             else
             {
@@ -55,16 +46,16 @@ namespace EazyPlanner.Infrastructure.Repositories
             var customerSupplier = await _context.CustomerSupplier.FirstOrDefaultAsync(c => c.Id == id);
             if (customerSupplier is null)
             {
-                throw new InvalidOperationException($"Customer supplier com id{id} não encontrado.");
+                throw new InvalidOperationException($"Costumer supplier with id{id} was not found.");
             }
             return customerSupplier;
         }
 
         public async Task<bool> CnpjExists(string cnpj)
-        {                   
+        {
             return await _context.CustomerSupplier.AnyAsync(c => c.CNPJ == cnpj);
         }
-        
+
 
         public async Task<IEnumerable<CustomerSupplier>> GetCustomersSuppliers()
         {

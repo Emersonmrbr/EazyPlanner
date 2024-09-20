@@ -1,13 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace EazyPlanner.Domain.Base
+﻿namespace EazyPlanner.Domain.Bases
 {
-    public class CreateBase(string createdBy, DateTime createAt, string updateBy, DateTime updateAt)
+    public class CreateBase()
     {
-        public string CreatedBy { get; set; } = createdBy;
-        public DateTime CreateAt { get; set; } = createAt;
-        public string UpdateBy { get; set; } = updateBy;
-        public DateTime UpdateAt { get; set; } = updateAt;
+        public string CreatedBy { get; set; } = string.Empty;
+        public DateTime CreateAt { get; set; } = DateTime.UtcNow;
+        public string UpdateBy { get; set; } = string.Empty;
+        public DateTime UpdateAt { get; set; } = DateTime.UtcNow;
     }
 }
 

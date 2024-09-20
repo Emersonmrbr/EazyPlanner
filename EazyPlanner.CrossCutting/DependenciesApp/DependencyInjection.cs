@@ -31,6 +31,9 @@ namespace EazyPlanner.CrossCutting.DependenciesApp
             services.AddScoped<IInvoiceRepository, InvoiceRepository>();
             services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
             services.AddScoped<IPeopleRepository, PeopleRepository>();
+            services.AddScoped<IProjectRepository, IProjectRepository>();
+            services.AddScoped<IChoreRepository, ChoreRepository>();
+            services.AddScoped<ITimeEntrieRepository, TimeEntrieRepository>();
             //services.AddValidatorsFromAssemblyContaining<BankrollAccountValidation>();
             //services.AddValidatorsFromAssemblyContaining<CostCenterValidation>();
             //services.AddValidatorsFromAssemblyContaining<CustomerSupplierValidation>();

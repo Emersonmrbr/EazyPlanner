@@ -5,14 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EazyPlanner.Infrastructure.Repositories
 {
-    public class PaymentMethodRepository : IPaymentMethodRepository
+    public class PaymentMethodRepository(ApplicationDbContext context) : IPaymentMethodRepository
     {
-        private ApplicationDbContext _context;
-
-        public PaymentMethodRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private ApplicationDbContext _context = context;
 
         public async Task<PaymentMethod> AddPaymentMethod(PaymentMethod paymentMethod)
         {
@@ -30,7 +25,7 @@ namespace EazyPlanner.Infrastructure.Repositories
 
         public async Task DeletePaymentMethod(int id)
         {
-            var paymentMethod = await GetPaymentMethod(id);
+            var paymentMethod = await GetPaymentMethodById(id);
             if (paymentMethod is not null)
             {
                 _context.PaymentMethod.Remove(paymentMethod);
@@ -42,12 +37,12 @@ namespace EazyPlanner.Infrastructure.Repositories
             }
         }
 
-        public async Task<PaymentMethod?> GetPaymentMethod(int id)
+        public async Task<PaymentMethod?> GetPaymentMethodById(int id)
         {
             var paymentMethod = await _context.PaymentMethod.FirstOrDefaultAsync(c => c.Id == id);
             if (paymentMethod is null)
             {
-                throw new InvalidOperationException($"Payment method with id{id} not found");
+                throw new InvalidOperationException($"Payment method with id{id} was not found.");
             }
             return paymentMethod;
         }

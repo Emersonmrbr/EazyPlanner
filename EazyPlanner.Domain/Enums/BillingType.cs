@@ -2,8 +2,8 @@
 {
     public enum BillingType
     {
-        NonBillable,
-        TimeBased,
-        FlatRate
+        NonBillable = 3010,
+        TimeBased = 3020,
+        FlatRate = 3030
     }
 }

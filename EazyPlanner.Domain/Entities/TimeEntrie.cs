@@ -1,10 +1,10 @@
-﻿using EazyPlanner.Domain.Base;
+﻿using EazyPlanner.Domain.Bases;
 using EazyPlanner.Domain.Enums;
 namespace EazyPlanner.Domain.Entities
 {
-    public class TimeEntrie(int timeEntrieId, TimeEntryType timeEntry, DateTime? date, DateTime? endDate, DateTime? startDate, double? duration, string? note, CreateBase? create, int taskId, Chore task, ICollection<People>? user)
+    public class TimeEntrie(int id, TimeEntryType timeEntry, DateTime? date, DateTime? endDate, DateTime? startDate, double? duration, string? note)
     {
-        public int TimeEntrieId { get; set; } = timeEntrieId;
+        public int Id { get; set; } = id;
         public TimeEntryType TimeEntry { get; set; } = timeEntry;
         public DateTime? Date { get; set; } = date;
         public DateTime? EndDate { get; set; } = endDate;
@@ -12,11 +12,11 @@ namespace EazyPlanner.Domain.Entities
         public double? Duration { get; set; } = duration;
         public string? Note { get; set; } = note;
 
-        public CreateBase? Create { get; set; } = create;
+        public CreateBase? Create { get; set; } = new();
 
-        public int TaskId { get; private set; } = taskId;
-        public Chore ProjectTask { get; private set; } = task;
+        public int? TaskId { get; private set; } = 0;
+        public Chore? ProjectTask { get; private set; } = new(0, string.Empty, string.Empty);
 
-        public ICollection<People>? User { get; set; } = user;
+        public ICollection<People>? User { get; set; } = [];
     }
 }

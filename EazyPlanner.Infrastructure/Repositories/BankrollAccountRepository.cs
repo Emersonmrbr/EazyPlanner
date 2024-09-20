@@ -5,13 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EazyPlanner.Infrastructure.Repositories
 {
-    public class BankrollAccountRepository : IBankrollAccountRepository
+    public class BankrollAccountRepository(ApplicationDbContext context) : IBankrollAccountRepository
     {
-        private ApplicationDbContext _context;
-        public BankrollAccountRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private ApplicationDbContext _context = context;
 
         public async Task<BankrollAccount> AddBankrollAccount(BankrollAccount bankrollAccount)
         {
@@ -29,7 +25,7 @@ namespace EazyPlanner.Infrastructure.Repositories
 
         public async Task DeleteBankrollAccount(int id)
         {
-            var bankrollAccount = await GetBankrollAccount(id);
+            var bankrollAccount = await GetBankrollAccountById(id);
             if (bankrollAccount is not null)
             {
                 _context.BankrollAccount.Remove(bankrollAccount);
@@ -42,13 +38,13 @@ namespace EazyPlanner.Infrastructure.Repositories
         }
 
 
-        public async Task<BankrollAccount?> GetBankrollAccount(int id)
+        public async Task<BankrollAccount?> GetBankrollAccountById(int id)
         {
 
             var bankrollAccount = await _context.BankrollAccount.FirstOrDefaultAsync(c => c.Id == id);
             if (bankrollAccount is null)
             {
-                throw new InvalidOperationException($"Bankroll account com id{id} não encontrado");
+                throw new InvalidOperationException($"Bankroll account with id{id} was not found.");
             }
             return bankrollAccount;
         }

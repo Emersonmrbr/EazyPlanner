@@ -2,7 +2,7 @@
 {
     public enum TimeEntryType
     {
-        TimeInterval,
-        Duration
+        TimeInterval = 5010,
+        Duration = 5020
     }
 }
