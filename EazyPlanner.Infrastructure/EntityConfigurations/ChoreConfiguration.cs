@@ -19,6 +19,26 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
                 .IsRequired();
             builder.Property(p => p.Completed)
                 .HasColumnType("bool");
+            builder.Property(p => p.Invoced)
+                .HasColumnType("bool");
+            builder.Property(p => p.DueDate)
+                .HasColumnType("date");
+            builder.Property(p => p.EndDate)
+                .HasColumnType("date");
+            builder.Property(p => p.StartDate)
+                .HasColumnType("date");
+            builder.Property(p => p.EstimateBillableAmount)
+                .HasColumnType("money")
+                .HasPrecision(18, 2);
+            builder.Property(p => p.EstimateCost)
+                .HasColumnType("money")
+                .HasPrecision(18, 2);
+            builder.Property(p => p.HourlyRate)
+                .HasColumnType("money")
+                .HasPrecision(18, 2);
+            builder.Property(p => p.EstimateHours)
+                .HasColumnType("real")
+                .HasPrecision(18, 6);
         }
     }
 }

@@ -12,8 +12,6 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
             builder.Property(p => p.Name)
                 .HasMaxLength(100)
                 .IsRequired();
-            builder.ComplexProperty(c => c!.Create)
-                .IsRequired();
         }
     }
 }

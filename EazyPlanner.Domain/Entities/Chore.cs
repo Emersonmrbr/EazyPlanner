@@ -11,8 +11,8 @@ namespace EazyPlanner.Domain.Entities
         public string? Description { get; set; } = string.Empty;
 
         public BillingType BillingType { get; set; } = BillingType.TimeBased;
-        public bool Completed { get; set; } = false;
-        public bool Invoced { get; set; } = true;
+        public bool? Completed { get; set; } = false;
+        public bool? Invoced { get; set; } = true;
         public DateTime? DueDate { get; set; } = DateTime.UtcNow;
         public DateTime? EndDate { get; set; } = DateTime.UtcNow;
         public DateTime? StartDate { get; set; } = DateTime.UtcNow;
