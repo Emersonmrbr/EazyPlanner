@@ -24,7 +24,7 @@ namespace EazyPlanner.Domain.Entities
         public double? HoursWorked { get; set; } = 0;
         public double? ProgressStatus { get; set; } = 0;
         public double? WorkedFromTotal { get; set; } = 0;
-        public string? Priority { get; set; } = string.Empty;
+        public PriorityTypes? Priority { get; set; } = PriorityTypes.Normal;
         public CreateBase? Create { get; set; } = new();
 
         public int? ProjectId { get; private set; } = 0;

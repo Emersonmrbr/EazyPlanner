@@ -39,6 +39,27 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
             builder.Property(p => p.EstimateHours)
                 .HasColumnType("real")
                 .HasPrecision(18, 6);
+            builder.Property(p => p.HoursLeft)
+                .HasColumnType("real")
+                .HasPrecision(18, 6);
+            builder.Property(p => p.HoursWorked)
+                .HasColumnType("real")
+                .HasPrecision(18, 6);
+            builder.Property(p => p.ProgressStatus)
+                .HasColumnType("real")
+                .HasPrecision(18, 6);
+            builder.Property(p => p.WorkedFromTotal)
+                .HasColumnType("real")
+                .HasPrecision(18, 6);
+            builder.Property(p => p.Priority);
+
+            //Realtionship one-to-many
+            builder
+                .HasMany(m => m.AssignedTo)
+                .WithOne(o => o.Chore)
+                .HasForeignKey(fk => fk.ChoreId);
+
+
         }
     }
 }
