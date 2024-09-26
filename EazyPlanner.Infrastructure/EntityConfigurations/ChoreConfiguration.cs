@@ -52,14 +52,28 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
                 .HasColumnType("real")
                 .HasPrecision(18, 6);
             builder.Property(p => p.Priority);
+            builder.Property(p => p.Create!.UpdateAt)
+                .HasColumnType("date");
+            builder.Property(p => p.Create!.CreateAt)
+                .HasColumnType("date");
+            builder.Property(p => p.Create!.CreatedBy)
+                .HasMaxLength(50);
+            builder.Property(p => p.Create!.UpdateBy)
+                .HasMaxLength(50);
 
             //Realtionship one-to-many
             builder
                 .HasMany(m => m.AssignedTo)
                 .WithOne(o => o.Chore)
                 .HasForeignKey(fk => fk.ChoreId);
-
-
+            builder
+                .HasMany(m => m.Followers)
+                .WithOne(o => o.Chore)
+                .HasForeignKey(fk => fk.ChoreId);
+            builder
+                .HasMany(m => m.TimeEntries)
+                .WithOne(o => o.Chore)
+                .HasForeignKey(fk => fk.ChoreId);
         }
     }
 }

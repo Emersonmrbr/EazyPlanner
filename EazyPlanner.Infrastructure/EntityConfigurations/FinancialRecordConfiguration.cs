@@ -10,46 +10,30 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
         {
             builder.HasKey(pk => pk.Id);
             builder.Property(p => p.Description)
-                .HasMaxLength(200)
+                .HasMaxLength(300)
+                .IsRequired();
+            builder.Property(p => p.RecordType)
                 .IsRequired();
             builder.Property(p => p.PlannedDate)
-                .HasColumnType("date");
+                .HasColumnType("date")
+                .IsRequired();
             builder.Property(p => p.PlannedAmount)
                 .HasColumnType("money")
-                .HasPrecision(18, 2);
+                .HasPrecision(18, 2).IsRequired();
             builder.Property(p => p.ReceivedDate)
-                .HasColumnType("date");
+                .HasColumnType("date").IsRequired();
             builder.Property(p => p.ReceivedAmount)
-                .HasColumnType("money")
-                .HasPrecision(18, 2);
-
-            builder.ComplexProperty(c => c.Create).IsRequired();
-
-            //Realtionship one-to-many
-            builder
-                .HasOne(o => o.BankrollAccount)
-                .WithMany(m => m.FinancialRecords)
-                .HasForeignKey(fk => fk.BankrollAccountId);
-            builder
-                .HasOne(o => o.CostCenter)
-                .WithMany(m => m.FinancialRecords)
-                .HasForeignKey(fk => fk.CosteCenterId);
-            builder
-                .HasOne(o => o.CustomerSupplier)
-                .WithMany(m => m.FinancialRecords)
-                .HasForeignKey(fk => fk.CustomerSupplierId);
-            builder
-                 .HasOne(o => o.FinanceCategory)
-                 .WithMany(m => m.FinancialRecords)
-                 .HasForeignKey(fk => fk.FinanceCategoryId);
-            builder
-                .HasOne(o => o.Invoice)
-                .WithMany(m => m.FinancialRecords)
-                .HasForeignKey(fk => fk.InvoiceId);
-            builder
-                .HasOne(o => o.PaymentMethod)
-                .WithMany(m => m.FinancialRecords)
-                .HasForeignKey(fk => fk.PaymentMethodId);
+                .HasColumnType("money").HasPrecision(18, 2)
+                .IsRequired();
+            builder.Property(p => p.Status);
+            builder.Property(p => p.Create!.UpdateAt)
+                .HasColumnType("date");  
+            builder.Property(p => p.Create!.CreateAt)
+                .HasColumnType("date");
+            builder.Property(p => p.Create!.CreatedBy)
+                .HasMaxLength(50);
+            builder.Property(p => p.Create!.UpdateBy)
+                .HasMaxLength(50);
         }
     }
 }

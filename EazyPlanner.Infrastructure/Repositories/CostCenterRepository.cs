@@ -25,7 +25,7 @@ namespace EazyPlanner.Infrastructure.Repositories
 
         public async Task DeleteCostCenter(int id)
         {
-            var costCenter = await GetCostCenter(id);
+            var costCenter = await GetCostCenterById(id);
             if (costCenter is not null)
             {
                 _context.CostCenter.Remove(costCenter);
@@ -37,7 +37,7 @@ namespace EazyPlanner.Infrastructure.Repositories
             }
         }
 
-        public async Task<CostCenter?> GetCostCenter(int id)
+        public async Task<CostCenter?> GetCostCenterById(int id)
         {
             var costCenter = await _context.CostCenter.FirstOrDefaultAsync(c => c.Id == id);
             if (costCenter is null)

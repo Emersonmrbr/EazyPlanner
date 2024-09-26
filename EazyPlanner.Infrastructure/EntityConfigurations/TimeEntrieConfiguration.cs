@@ -4,26 +4,25 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EazyPlanner.Infrastructure.EntityConfigurations
 {
-    public class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
+    public class TimeEntrieConfiguration : IEntityTypeConfiguration<TimeEntrie>
     {
-        public void Configure(EntityTypeBuilder<Invoice> builder)
+        public void Configure(EntityTypeBuilder<TimeEntrie> builder)
         {
             builder.HasKey(pk => pk.Id);
-            builder.Property(p => p.Name)
-                .HasMaxLength(100)
-                .IsRequired();
-            builder.Property(p => p.Number)
-                .HasMaxLength(100)
-                .IsRequired();
-            builder.Property(p => p.Amount)
-                .HasColumnType("money")
-                .HasPrecision(18, 2)
+            builder.Property(p => p.TimeEntry)
                 .IsRequired();
             builder.Property(p => p.Date)
                 .HasColumnType("date")
                 .IsRequired();
-            builder.Property(p => p.File)
-                .HasMaxLength(150);
+            builder.Property(p => p.EndDate)
+                .HasColumnType("date");
+            builder.Property(p => p.StartDate)
+                .HasColumnType("date");
+            builder.Property(p => p.Duration)
+                .HasColumnType("real")
+                .HasPrecision(18,6);
+            builder.Property(p => p.Note)
+                .HasMaxLength(300);
             builder.Property(p => p.Create!.UpdateAt)
                 .HasColumnType("date");
             builder.Property(p => p.Create!.CreateAt)
@@ -32,12 +31,6 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
                 .HasMaxLength(50);
             builder.Property(p => p.Create!.UpdateBy)
                 .HasMaxLength(50);
-
-            //Realtionship one-to-many
-            builder
-                .HasMany(m => m.FinancialRecords)
-                .WithOne(o => o.Invoice)
-                .HasForeignKey(fk => fk.InvoiceId);
         }
     }
 }

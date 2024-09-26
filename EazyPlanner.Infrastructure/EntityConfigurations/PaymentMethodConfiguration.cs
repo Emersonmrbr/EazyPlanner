@@ -12,9 +12,20 @@ namespace EazyPlanner.Infrastructure.EntityConfigurations
             builder.Property(p => p.Name)
                 .HasMaxLength(100)
                 .IsRequired();
+            builder.Property(p => p.Create!.UpdateAt)
+                .HasColumnType("date");
+            builder.Property(p => p.Create!.CreateAt)
+                .HasColumnType("date");
+            builder.Property(p => p.Create!.CreatedBy)
+                .HasMaxLength(50);
+            builder.Property(p => p.Create!.UpdateBy)
+                .HasMaxLength(50);
 
-            builder.ComplexProperty(c => c.Create)
-                .IsRequired();
+            //Realtionship one-to-many
+            builder
+                .HasMany(m => m.FinancialRecords)
+                .WithOne(o => o.PaymentMethod)
+                .HasForeignKey(fk => fk.PaymentMethodId);
         }
     }
 }

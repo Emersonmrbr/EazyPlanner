@@ -17,6 +17,7 @@ namespace EazyPlanner.Domain.Entities
         public Chore? Chore { get; set; } = new(0, string.Empty, string.Empty);
         public int? ProjectId { get; set; } = 0;
         public Project? Project { get; set; } = new(0, string.Empty, string.Empty);
+        public ICollection<TimeEntrie> TimeEntries { get; set; } = [];
 
     }
 }

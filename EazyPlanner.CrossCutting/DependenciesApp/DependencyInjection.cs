@@ -15,14 +15,10 @@ namespace EazyPlanner.CrossCutting.DependenciesApp
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services,
-     IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration
-                                  .GetConnectionString("SqlServerString") ?? throw new InvalidOperationException("Connection string 'SqlServerString' not found.");
-
+            var connectionString = configuration.GetConnectionString("SqlServerString") ?? throw new InvalidOperationException("Connection string 'SqlServerString' not found.");
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
-
             services.AddScoped<IBankrollAccountRepository, BankrollAccountRepository>();
             services.AddScoped<IcostCenterRepository, CostCenterRepository>();
             services.AddScoped<ICustomerSupplierRepository, CustomerSupplierRepository>();
@@ -34,15 +30,13 @@ namespace EazyPlanner.CrossCutting.DependenciesApp
             services.AddScoped<IProjectRepository, IProjectRepository>();
             services.AddScoped<IChoreRepository, ChoreRepository>();
             services.AddScoped<ITimeEntrieRepository, TimeEntrieRepository>();
+            services.AddFormValidation(config => config.AddFluentValidation(typeof(ApplicationDbContext).Assembly));
             //services.AddValidatorsFromAssemblyContaining<BankrollAccountValidation>();
             //services.AddValidatorsFromAssemblyContaining<CostCenterValidation>();
             //services.AddValidatorsFromAssemblyContaining<CustomerSupplierValidation>();
-            services.AddFormValidation(config => config
-                .AddFluentValidation(typeof(ApplicationDbContext).Assembly));
             //.AddFluentValidation(typeof(CostCenterValidation).Assembly)
             //.AddFluentValidation(typeof(CustomerSupplierValidation).Assembly));
 
-            //services.AddScoped<ILivroService, LivroService>();
 
             return services;
         }

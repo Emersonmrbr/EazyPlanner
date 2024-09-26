@@ -1,18 +1,19 @@
 ﻿using EazyPlanner.Domain.Bases;
+using EazyPlanner.Domain.Enums;
 
 namespace EazyPlanner.Domain.Entities
 {
 
-    public class FinancialRecord(int id, string description, DateTime plannedDate, decimal plannedAmount, DateTime? receivedDate, decimal? receivedAmount, string recordType, string? status)
+    public class FinancialRecord(int id, string description, DateTime plannedDate, decimal plannedAmount)
     {
         public int Id { get; private set; } = id;
         public string Description { get; set; } = description;
+        public RecordType RecordType { get; set; } = RecordType.Revenue;
         public DateTime PlannedDate { get; set; } = plannedDate;
         public decimal PlannedAmount { get; set; } = plannedAmount;
-        public DateTime? ReceivedDate { get; set; } = receivedDate;
-        public decimal? ReceivedAmount { get; set; } = receivedAmount;
-        public string RecordType { get; set; } = recordType;
-        public string? Status { get; set; } = status;
+        public DateTime? ReceivedDate { get; set; } = DateTime.UtcNow;
+        public decimal? ReceivedAmount { get; set; } = 0;
+        public StatusType? Status { get; set; } = StatusType.Open;
 
         public CreateBase? Create { get; set; } = new();
 
