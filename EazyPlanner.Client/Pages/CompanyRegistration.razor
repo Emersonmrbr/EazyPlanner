@@ -1,0 +1,64 @@
+﻿@page "/companyregistration"
+
+<PageTitle>Company Registration</PageTitle>
+
+@using System.Text.RegularExpressions
+@using System.ComponentModel.DataAnnotations
+
+<MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+    <MudGrid>
+        <MudItem xs="4">
+            <MudTextField T="string" Label="CNPJ" Required="true" RequiredError="CNPJ is required!" Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="4">
+            <MudTextField T="string" Label="Company name" Required="true" RequiredError="Company name is required!" Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="4">
+            <MudTextField T="string" Label="Company fantasy" Required="false" RequiredError="Company fantasy is required!" Variant="Variant.Outlined" />
+        </MudItem>
+
+        <MudItem xs="6">
+            <MudTextField T="string" Label="Province ID" Required="false" RequiredError="Province ID is required!" Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="6">
+            <MudTextField T="string" Label="City ID" Required="false" RequiredError="City ID is required!" Variant="Variant.Outlined" />
+        </MudItem>
+
+        <MudItem xs="4">
+            <MudTextField T="string" Label="Zip code" Required="true" RequiredError="Zip code is required!" Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="4">
+            <MudTextField T="string" Label="Street name" Required="true" RequiredError="Street name is required!" Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="4">
+            <MudTextField T="string" Label="Building number" Required="true" RequiredError="Building number is required!" Variant="Variant.Outlined" />
+        </MudItem>
+
+        <MudItem xs="3">
+            <MudTextField T="string" Label="Secondary address" Required="false" RequiredError="Secondary address is required!" Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="3">
+            <MudTextField T="string" Label="City" Required="true" RequiredError="City is required!" Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="3">
+            <MudTextField T="string" Label="State" Required="true" RequiredError="State is required!" Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="3">
+            <MudTextField T="string" Label="Country" Required="true" RequiredError="Country is required!" Variant="Variant.Outlined" />
+        </MudItem>
+    </MudGrid>
+</MudForm>
+<MudGrid>
+    <MudItem xs="12">
+    </MudItem>
+    <MudItem xs="12" sm="3">
+        <MudButton Variant="Variant.Outlined" Color="Color.Success" Size="Size.Large" DropShadow="false" FullWidth="true" Style="height: 60px;" OnClick="@(()=>form.Validate())">Validate</MudButton>
+    </MudItem>
+</MudGrid>
+
+@code {
+    bool success;
+    string[] errors = { };
+    MudTextField<string>? pwField1;
+    MudForm? form;
+}
